@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07111f"><title>Account | FlyWithAarav</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.account-wrap{min-height:calc(100vh - 110px);display:grid;place-items:center;padding:55px 18px;background:radial-gradient(ellipse at top right,#16364b 0%,#07111f 55%)}
+.account-card{width:min(100%,460px);padding:34px;background:#0d1b2c;border:1px solid #ffffff20;box-shadow:0 24px 70px #0005}
+.account-card h1{font-size:clamp(42px,8vw,60px);line-height:.95;margin:0 0 12px}
+.account-card .sub{font-size:12px;color:#9aabba;margin-bottom:26px}
+.account-card label{display:block;color:#c4d0dd;font-size:11px;margin:16px 0 7px}
+.account-card input{width:100%;padding:13px 14px;background:#07111f;border:1px solid #ffffff30;color:#f4f7fb;font:inherit;outline:none}
+.account-card input:focus{border-color:#7be0d0}
+.account-card .button{width:100%;border:0;cursor:pointer;margin-top:17px;font:700 12px 'DM Sans',Arial,sans-serif}
+.account-message{font-size:12px;line-height:1.7;margin:17px 0 0;color:#7be0d0;overflow-wrap:anywhere}
+.account-message.error{color:#ffb6a9}
+.account-foot{font-size:10px;color:#9aabba;margin-top:22px}
+.account-foot a{color:#7be0d0}
+#verify-panel[hidden],#signup-note[hidden]{display:none}
+</style>
+</head>
+<body>
+<div class="topline">✦ FLIGHT DECK ONLINE <span>/</span> FLYWITHAARAV ACCOUNT</div>
+<header><a class="brand" href="index.html"><b>FA<span>✦</span></b><span><strong>FLYWITHAARAV</strong><small>VIRTUAL AVIATION</small></span></a><nav style="display:flex"><a href="index.html">← Back to website</a></nav></header>
+<main class="account-wrap">
+<section class="account-card">
+<p class="eyebrow">MEMBER ACCESS / FLIGHT DECK</p>
+<h1>Your <em>account.</em></h1>
+<p class="sub">Sign in or create an account using your email. We'll send you a one-time verification code.</p>
+<form id="email-form">
+<label for="email">Email address</label>
+<input id="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+<button class="button" type="submit">SEND VERIFICATION CODE ↗</button>
+</form>
+<form id="verify-panel" hidden>
+<label for="code">6-digit verification code</label>
+<input id="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="123456" required>
+<button class="button" type="submit">VERIFY & SIGN IN ↗</button>
+</form>
+<p id="message" class="account-message" role="status" aria-live="polite"></p>
+<p id="signup-note" class="account-foot" hidden>Code sent. Check your inbox and spam folder. The code expires after a short time.</p>
+<div id="account-panel" hidden>
+<p class="account-message">You're signed in.</p>
+<p id="account-email" class="sub"></p>
+<button id="logout" class="button" type="button">SIGN OUT</button>
+</div>
+<p class="account-foot">By continuing, you agree to use the site respectfully. Keep your verification code private.</p>
+</section>
+</main>
+<footer><a class="brand" href="index.html"><b>FA<span>✦</span></b><span><strong>FLYWITHAARAV</strong><small>VIRTUAL AVIATION</small></span></a><p>Made for the love of flight.<small>Not affiliated with Microsoft or any airline.</small></p><small class="copyright">© <span id="year"></span> FLYWITHAARAV</small></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth.js"></script>
+</body></html>
