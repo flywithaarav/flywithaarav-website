@@ -41,9 +41,9 @@
 </div>
 <form id="account-form">
 <label for="email">Email address</label>
-<input id="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+<input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
 <label for="password">Password</label>
-<input id="password" type="password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters" required>
+<input id="password" name="password" type="password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters" required>
 <button id="account-submit" class="button" type="submit">CREATE ACCOUNT ↗</button>
 </form>
 <button id="forgot-password" class="text-button" type="button" hidden>Forgot your password? Email me a reset link</button>
@@ -56,7 +56,7 @@
 <form id="reset-panel" hidden>
 <p class="sub">Choose a new password for your account.</p>
 <label for="new-password">New password</label>
-<input id="new-password" type="password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters" required>
+<input id="new-password" name="new-password" type="password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters" required>
 <button class="button" type="submit">SAVE NEW PASSWORD ↗</button>
 </form>
 <div id="account-panel" hidden>
