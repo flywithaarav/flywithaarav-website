@@ -1,0 +1,96 @@
+{
+  "youtube_url": "https://www.youtube.com/@flywithaarav",
+  "hero": {
+    "eyebrow": "YOUR WINDOW TO THE SKIES",
+    "headline_first": "VIRTUAL SKIES.",
+    "headline_second": "REAL PASSION.",
+    "description": "Welcome aboard FlyWithAarav — a place for memorable routes, aircraft details and the moments that make flight simulation special.",
+    "image": "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=2200&q=90",
+    "note_heading": "THE WORLD, ONE FLIGHT AT A TIME",
+    "note_subtitle": "MICROSOFT FLIGHT SIMULATOR"
+  },
+  "ticker": "FLIGHT SIMULATION　✦　AIRCRAFT SPOTTING　✦　VIRTUAL ROUTES　✦　AVIATION PHOTOGRAPHY　✦",
+  "flights_intro": "From pushback to touchdown, every flight has a story. Replace these sample cards with your latest uploads.",
+  "flights": [
+    {
+      "label": "FEATURED FLIGHT · EGCC",
+      "title": "A journey begins here",
+      "description": "Add your latest flight video and route details to make this your featured mission.",
+      "image": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=900&q=80",
+      "link_label": "Watch flight ↗",
+      "link_url": "https://www.youtube.com/@flywithaarav"
+    },
+    {
+      "label": "FLIGHT DIARY · MSFS",
+      "title": "Explore the skies",
+      "description": "Scenic approaches, long-haul journeys and favourite moments in the sim.",
+      "image": "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=900&q=80",
+      "link_label": "Explore videos ↗",
+      "link_url": "https://www.youtube.com/@flywithaarav"
+    },
+    {
+      "label": "COCKPIT VIEW · IN FOCUS",
+      "title": "From the flight deck",
+      "description": "Showcase cockpit setups, procedures and aircraft systems you enjoy.",
+      "image": "https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&w=900&q=80",
+      "link_label": "Watch more ↗",
+      "link_url": "https://www.youtube.com/@flywithaarav"
+    }
+  ],
+  "fleet_intro": "A few icons of the virtual skies. Update this list to match the aircraft you fly most.",
+  "fleet": [
+    {
+      "category": "NARROW-BODY",
+      "title": "Airbus A320neo",
+      "description": "Short and medium-haul flying, busy airports and efficient climbs.",
+      "tag": "COMMERCIAL　↗"
+    },
+    {
+      "category": "WIDE-BODY",
+      "title": "Boeing 787 Dreamliner",
+      "description": "Long-haul adventures, modern cockpit tech and smooth cruising.",
+      "tag": "LONG HAUL　↗"
+    },
+    {
+      "category": "JUMBO JET",
+      "title": "Boeing 747",
+      "description": "A legendary silhouette and a classic way to cross continents.",
+      "tag": "WIDE-BODY　↗"
+    }
+  ],
+  "gallery_intro": "A visual logbook of approaches, sunsets and aircraft. Click a photo to enlarge it.",
+  "gallery": [
+    {
+      "image": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1000&q=85",
+      "alt": "Aircraft above the clouds",
+      "label": "01 / ABOVE THE CLOUDS ↗"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=900&q=85",
+      "alt": "Airplane wing view",
+      "label": "02 / WING VIEW ↗"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&w=900&q=85",
+      "alt": "Aircraft on runway",
+      "label": "03 / READY FOR DEPARTURE ↗"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1512289984044-071903207f5d?auto=format&fit=crop&w=900&q=85",
+      "alt": "Aircraft cockpit",
+      "label": "04 / FLIGHT DECK ↗"
+    }
+  ],
+  "about": {
+    "eyebrow": "04 / ABOUT THE PILOT",
+    "headline_first": "Not just a simulator.",
+    "headline_second": "A whole world to explore.",
+    "description": "FlyWithAarav is my corner of the internet for sharing Microsoft Flight Simulator, aircraft I enjoy and views worth saving. Whether you're here for the planes, routes or screenshots — welcome aboard."
+  },
+  "subscribe": {
+    "eyebrow": "NEXT STOP / YOUTUBE",
+    "headline_first": "See you",
+    "headline_second": "up there.",
+    "description": "New routes, aircraft and virtual aviation adventures — follow along on YouTube."
+  }
+}
