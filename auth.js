@@ -6,7 +6,9 @@
   const $ = (id) => document.getElementById(id);
   $("year").textContent = new Date().getFullYear();
 
-  const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+  });
   let mode = new URLSearchParams(window.location.search).get("mode") === "signin" ? "signin" : "signup";
   let pendingEmail = "";
   let recoveryMode = false;
