@@ -78,7 +78,7 @@
           pendingEmail = email;
           showOnly("verify-panel");
           $("signup-note").hidden = false;
-          showMessage("Account created. Enter the 8-digit code from your confirmation email.");
+          showMessage("Account created. Enter the 6-digit code from your confirmation email.");
           $("code").focus();
         }
       }
