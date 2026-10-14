@@ -1,0 +1,151 @@
+media:
+  - name: images
+    label: Website images
+    input: media/images
+    output: /flywithaarav-website/media/images
+    extensions: [jpg, jpeg, png, webp, gif]
+    categories: [image]
+    rename: safe
+
+content:
+  - name: site
+    label: Website content
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: youtube_url
+        label: YouTube channel URL
+        type: string
+      - name: hero
+        label: Homepage hero
+        type: object
+        fields:
+          - name: eyebrow
+            label: Small heading
+            type: string
+          - name: headline_first
+            label: Main heading — first line
+            type: string
+          - name: headline_second
+            label: Main heading — highlighted line
+            type: string
+          - name: description
+            label: Intro text
+            type: text
+          - name: image
+            label: Background image URL
+            type: string
+          - name: note_heading
+            label: Flight note heading
+            type: string
+          - name: note_subtitle
+            label: Flight note subtitle
+            type: string
+      - name: ticker
+        label: Scrolling-style banner text
+        type: string
+      - name: flights_intro
+        label: Flights section intro
+        type: text
+      - name: flights
+        label: Flight cards
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: label
+            label: Small label
+            type: string
+          - name: title
+            label: Card title
+            type: string
+          - name: description
+            label: Description
+            type: text
+          - name: image
+            label: Image URL
+            type: string
+          - name: link_label
+            label: Link text
+            type: string
+          - name: link_url
+            label: Link URL
+            type: string
+      - name: fleet_intro
+        label: Aircraft section intro
+        type: text
+      - name: fleet
+        label: Aircraft
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: category
+            label: Aircraft category
+            type: string
+          - name: title
+            label: Aircraft name
+            type: string
+          - name: description
+            label: Description
+            type: text
+          - name: tag
+            label: Bottom label
+            type: string
+      - name: gallery_intro
+        label: Gallery section intro
+        type: text
+      - name: gallery
+        label: Gallery images
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{label}"
+        fields:
+          - name: image
+            label: Image URL
+            type: string
+          - name: alt
+            label: Image description
+            type: string
+          - name: label
+            label: Caption
+            type: string
+      - name: about
+        label: About section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Small heading
+            type: string
+          - name: headline_first
+            label: Main heading — first line
+            type: string
+          - name: headline_second
+            label: Highlighted heading
+            type: string
+          - name: description
+            label: About text
+            type: text
+      - name: subscribe
+        label: YouTube callout
+        type: object
+        fields:
+          - name: eyebrow
+            label: Small heading
+            type: string
+          - name: headline_first
+            label: Main heading
+            type: string
+          - name: headline_second
+            label: Highlighted heading
+            type: string
+          - name: description
+            label: Description
+            type: text
