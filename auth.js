@@ -7,7 +7,7 @@
   $("year").textContent = new Date().getFullYear();
 
   const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  let mode = "signup";
+  let mode = new URLSearchParams(window.location.search).get("mode") === "signin" ? "signin" : "signup";
   let pendingEmail = "";
   let recoveryMode = false;
 
@@ -184,6 +184,6 @@
   client.auth.getSession().then(({ data, error }) => {
     if (error) showMessage(error.message, true);
     if (data.session && !recoveryMode) showAccount(data.session.user);
-    else if (!data.session) setMode("signup");
+    else if (!data.session) setMode(mode);
   });
 })();
