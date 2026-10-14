@@ -13,11 +13,17 @@
 .account-card input{width:100%;padding:13px 14px;background:#07111f;border:1px solid #ffffff30;color:#f4f7fb;font:inherit;outline:none}
 .account-card input:focus{border-color:#7be0d0}
 .account-card .button{width:100%;border:0;cursor:pointer;margin-top:17px;font:700 12px 'DM Sans',Arial,sans-serif}
+.account-card .button:disabled{opacity:.6;cursor:wait}
 .account-message{font-size:12px;line-height:1.7;margin:17px 0 0;color:#7be0d0;overflow-wrap:anywhere}
 .account-message.error{color:#ffb6a9}
 .account-foot{font-size:10px;color:#9aabba;margin-top:22px}
-.account-foot a{color:#7be0d0}
-#verify-panel[hidden],#signup-note[hidden]{display:none}
+.account-foot a,.text-button{color:#7be0d0}
+.auth-switch{display:flex;gap:10px;margin:18px 0 8px}
+.auth-switch button,.text-button{background:none;border:0;cursor:pointer;font:inherit;font-size:11px;padding:8px 0}
+.auth-switch button{color:#9aabba;border-bottom:1px solid transparent;flex:1}
+.auth-switch button.active{color:#7be0d0;border-color:#7be0d0}
+.text-button{margin-top:12px;text-decoration:underline}
+[hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -27,25 +33,40 @@
 <section class="account-card">
 <p class="eyebrow">MEMBER ACCESS / FLIGHT DECK</p>
 <h1>Your <em>account.</em></h1>
-<p class="sub">Sign in or create an account using your email. We'll send you a one-time verification code.</p>
-<form id="email-form">
+<p class="sub" id="intro">Create an account with your email and a password, or sign in to your existing account.</p>
+<div id="auth-forms">
+<div class="auth-switch" role="tablist" aria-label="Account action">
+<button id="show-signin" type="button">SIGN IN</button>
+<button id="show-signup" type="button" class="active">CREATE ACCOUNT</button>
+</div>
+<form id="account-form">
 <label for="email">Email address</label>
 <input id="email" type="email" autocomplete="email" placeholder="you@example.com" required>
-<button class="button" type="submit">SEND VERIFICATION CODE ↗</button>
+<label for="password">Password</label>
+<input id="password" type="password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters" required>
+<button id="account-submit" class="button" type="submit">CREATE ACCOUNT ↗</button>
 </form>
+<button id="forgot-password" class="text-button" type="button" hidden>Forgot your password? Email me a reset link</button>
+</div>
 <form id="verify-panel" hidden>
-<label for="code">8-digit verification code</label>
+<label for="code">8-digit email verification code</label>
 <input id="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{8}" maxlength="8" placeholder="12345678" required>
-<button class="button" type="submit">VERIFY & SIGN IN ↗</button>
+<button class="button" type="submit">VERIFY EMAIL ↗</button>
 </form>
-<p id="message" class="account-message" role="status" aria-live="polite"></p>
-<p id="signup-note" class="account-foot" hidden>Code sent. Check your inbox and spam folder. The code expires after a short time.</p>
+<form id="reset-panel" hidden>
+<p class="sub">Choose a new password for your account.</p>
+<label for="new-password">New password</label>
+<input id="new-password" type="password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters" required>
+<button class="button" type="submit">SAVE NEW PASSWORD ↗</button>
+</form>
 <div id="account-panel" hidden>
 <p class="account-message">You're signed in.</p>
 <p id="account-email" class="sub"></p>
 <button id="logout" class="button" type="button">SIGN OUT</button>
 </div>
-<p class="account-foot">By continuing, you agree to use the site respectfully. Keep your verification code private.</p>
+<p id="message" class="account-message" role="status" aria-live="polite"></p>
+<p id="signup-note" class="account-foot" hidden>Check your inbox and spam folder for the verification code. Keep it private.</p>
+<p class="account-foot">Use a unique password and never share your password or verification code.</p>
 </section>
 </main>
 <footer><a class="brand" href="index.html"><b>FA<span>✦</span></b><span><strong>FLYWITHAARAV</strong><small>VIRTUAL AVIATION</small></span></a><p>Made for the love of flight.<small>Not affiliated with Microsoft or any airline.</small></p><small class="copyright">© <span id="year"></span> FLYWITHAARAV</small></footer>
