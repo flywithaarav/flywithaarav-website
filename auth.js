@@ -57,7 +57,7 @@
       $("email-form").hidden = true;
       $("verify-panel").hidden = false;
       $("signup-note").hidden = false;
-      showMessage("Code sent. Enter the 6-digit code from your email.");
+      showMessage("Code sent. Enter the 8-digit code from your email.");
       $("code").focus();
     } catch (error) {
       showMessage(error.message || "Couldn't send a code. Please try again.", true);
