@@ -9,7 +9,9 @@
   const signOutButton = document.getElementById("main-signout");
   if (!window.supabase || !link || !signedIn || !signOutButton) return;
 
-  const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+  });
 
   function renderSession(session) {
     const user = session && session.user;
