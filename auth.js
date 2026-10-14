@@ -6,7 +6,7 @@
  body to include the one-time code: {{ .Token }}.
 */
 (() => {
-  const SUPABASE_URL = "https://supabase.com/dashboard/project/upvkjgwnavtkcsyzwjjn";
+  const SUPABASE_URL = "https://upvkjgwnavtkcsyzwjjn.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_nUSXAIb0eqF7eQuyFYVycw_VHEB3p2k";
   const $ = (id) => document.getElementById(id);
   $("year").textContent = new Date().getFullYear();
