@@ -1,0 +1,16 @@
+{
+  "id": "./",
+  "name": "FlyWithAarav",
+  "short_name": "FlyWithAarav",
+  "description": "Microsoft Flight Simulator flights, aircraft, screenshots and aviation videos.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#07111f",
+  "theme_color": "#07111f",
+  "categories": ["entertainment", "education"],
+  "icons": [
+    { "src": "./app-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
