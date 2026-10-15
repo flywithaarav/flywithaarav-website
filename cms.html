@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#07111f"><title>Easter Egg CMS | FlyWithAarav</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#07111f;color:#f4f7fb;font:16px/1.5 Arial,sans-serif;padding:28px 16px}.wrap{max-width:720px;margin:auto}.eyebrow{color:#7be0d0;font-size:12px;letter-spacing:2px;font-weight:bold}h1{margin:6px 0 8px;font-size:clamp(28px,5vw,42px)}.muted{color:#aebdce}.panel{margin-top:24px;padding:24px;background:#0d1b2c;border:1px solid #7be0d044;border-radius:14px}label{display:block;margin:16px 0 6px;font-weight:bold;font-size:13px;color:#d5deea}input,textarea{width:100%;padding:12px;border:1px solid #34475c;border-radius:7px;background:#07111f;color:#fff;font:inherit}textarea{min-height:130px;resize:vertical}.check{display:flex;gap:10px;align-items:center}.check input{width:auto}button,.back{display:inline-block;border:0;border-radius:7px;padding:12px 16px;background:#7be0d0;color:#07111f;font-weight:bold;cursor:pointer;text-decoration:none;margin-top:18px}.back{margin-left:8px;background:#1c3046;color:#fff}.status{margin-top:14px;color:#7be0d0;white-space:pre-wrap}.hint{font-size:13px;color:#aebdce}button:disabled{opacity:.6}
+</style></head><body><main class="wrap"><p class="eyebrow">FLYWITHAARAV / CONTENT MANAGER</p><h1>Easter egg editor</h1><p class="muted">Control the little ✦ button in the top-left corner of your website. Add text, an image, and a link — or hide the Easter egg.</p><div class="panel" id="editor" hidden>
+<form id="egg-form"><label class="check"><input id="enabled" type="checkbox"> Show Easter egg on the website</label><label for="title">Popup title</label><input id="title" maxlength="100" placeholder="You found the secret!"><label for="body">Text / anything you want to say</label><textarea id="body" maxlength="5000" placeholder="Write your secret message here..."></textarea><label for="image">Image URL (optional, must start with https://)</label><input id="image" type="url" placeholder="https://..."><label for="link">Link URL (optional, must start with https://)</label><input id="link" type="url" placeholder="https://..."><label for="link-label">Link button text</label><input id="link-label" maxlength="60" placeholder="Explore more"><p class="hint">Tip: you can use a public image URL. Changes appear on the live site after saving and refreshing.</p><button id="save" type="submit">Save Easter egg</button><a class="back" href="index.html">Back to website</a><p class="status" id="status" role="status"></p></form></div><p id="login-note" class="muted">Checking your sign-in…</p></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
+const SUPABASE_URL="https://upvkjgwnavtkcsyzwjjn.supabase.co",SUPABASE_KEY="sb_publishable_nUSXAIb0eqF7eQuYFYVycw_VHEB3p2k";
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const form=document.getElementById("egg-form"),status=document.getElementById("status");
+async function init(){
+ const {data:{session}}=await db.auth.getSession();
+ if(!session){document.getElementById("login-note").innerHTML='Please <a style="color:#7be0d0" href="auth.html?mode=signin">sign in</a> with your FlyWithAarav account first.';return;}
+ const {data:role,error:roleError}=await db.from("user_roles").select("role").eq("user_id",session.user.id).maybeSingle();
+ if(roleError||role?.role!=="admin"){document.getElementById("login-note").textContent="This editor is restricted to the site administrator account.";return;}
+ document.getElementById("login-note").textContent="Signed in as site administrator.";
+ document.getElementById("editor").hidden=false;
+ const {data,error}=await db.from("site_easter_egg").select("*").eq("id",1).single();
+ if(error){status.textContent="Could not load settings: "+error.message;return;}
+ document.getElementById("enabled").checked=data.enabled;document.getElementById("title").value=data.title||"";document.getElementById("body").value=data.body||"";document.getElementById("image").value=data.image_url||"";document.getElementById("link").value=data.link_url||"";document.getElementById("link-label").value=data.link_label||"";
+}
+form.addEventListener("submit",async e=>{
+ e.preventDefault();const save=document.getElementById("save");save.disabled=true;status.textContent="Saving…";
+ const image=document.getElementById("image").value.trim(),link=document.getElementById("link").value.trim();
+ if((image&&!image.startsWith("https://"))||(link&&!link.startsWith("https://"))){status.textContent="Image and link URLs must start with https://";save.disabled=false;return;}
+ const values={enabled:document.getElementById("enabled").checked,title:document.getElementById("title").value.trim()||"You found the secret!",body:document.getElementById("body").value,image_url:image,link_url:link,link_label:document.getElementById("link-label").value.trim()||"Explore more",updated_at:new Date().toISOString()};
+ const {error}=await db.from("site_easter_egg").upsert({id:1,...values},{onConflict:"id"});
+ status.textContent=error?"Could not save: "+error.message:"Saved! Refresh your website to see the changes.";save.disabled=false;
+});
+init();
+</script></body></html>
