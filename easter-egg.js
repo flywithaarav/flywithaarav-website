@@ -1,6 +1,6 @@
 (() => {
   const URL = "https://upvkjgwnavtkcsyzwjjn.supabase.co";
-  const KEY = "sb_publishable_nUSXAIb0eqF7eQuyFYVycw_VHEB3p2k";
+  const KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwdmtqZ3duYXZ0a2NzeXp3ampuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE5ODkyMzcsImV4cCI6MjEwNzU2NTIzN30.sw-dBRwmWgUyattdFK7zAp1YA5BuFYDTmiLNmgdbYpM";
   if (!window.supabase) return;
   const db = window.supabase.createClient(URL, KEY);
   const style = document.createElement("style");
