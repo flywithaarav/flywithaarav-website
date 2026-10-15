@@ -3,7 +3,16 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#07111f"><meta name="description" content="FlyWithAarav — Microsoft Flight Simulator flights, aircraft and aviation videos.">
-<title>FlyWithAarav | Virtual skies. Real passion.</title><link rel="stylesheet" href="style.css"><style>#signed-in-account{align-items:center;gap:10px}#signed-in-account[hidden]{display:none}#main-signout{font:inherit;cursor:pointer;background:transparent;color:var(--accent)}#main-signout:hover{color:white}</style>
+<title>FlyWithAarav | Virtual skies. Real passion.</title><link rel="stylesheet" href="style.css"><style>
+#fr24-widget{position:fixed;right:16px;bottom:16px;z-index:30;width:340px;max-width:calc(100vw - 32px);height:250px;background:#07111f;border:1px solid #7be0d077;border-radius:8px;box-shadow:0 8px 30px #0008;overflow:hidden}
+#fr24-widget summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;padding:10px 13px;background:#0d1b2c;color:#f4f7fb;font-size:11px;font-weight:700;letter-spacing:.7px}
+#fr24-widget summary::-webkit-details-marker{display:none}
+#fr24-widget summary span{color:#7be0d0}
+#fr24-widget iframe{display:block;width:100%;height:calc(100% - 40px);border:0;background:#10243a}
+#fr24-widget:not([open]){width:auto;height:auto}
+#fr24-widget:not([open]) summary{border-radius:8px}
+@media(max-width:620px){#fr24-widget{right:10px;bottom:10px;width:290px;height:220px;max-width:calc(100vw - 20px)}}
+</style><style>#signed-in-account{align-items:center;gap:10px}#signed-in-account[hidden]{display:none}#main-signout{font:inherit;cursor:pointer;background:transparent;color:var(--accent)}#main-signout:hover{color:white}</style>
 </head>
 <body>
 <div class="topline">✦ FLIGHT DECK ONLINE <span>/</span> MSFS • AVIATION • DISCOVERY</div>
@@ -17,5 +26,6 @@
 <section class="about" id="about"><div class="monogram">FA<span>✦</span></div><div><p class="eyebrow">04 / ABOUT THE PILOT</p><h2>Not just a simulator.<br><em>A whole world to explore.</em></h2><p>FlyWithAarav is my corner of the internet for sharing Microsoft Flight Simulator, aircraft I enjoy and views worth saving. Whether you're here for the planes, routes or screenshots — welcome aboard.</p><a class="button" href="https://www.youtube.com/@flywithaarav" target="_blank" rel="noopener">Join me on YouTube ↗</a></div><div class="stamp">CLEARED<br>FOR<br>TAKEOFF</div></section>
 <section class="subscribe"><div><p class="eyebrow">NEXT STOP / YOUTUBE</p><h2>See you <em>up there.</em></h2><p>New routes, aircraft and virtual aviation adventures — follow along on YouTube.</p></div><a class="button dark" href="https://www.youtube.com/@flywithaarav" target="_blank" rel="noopener">▶ Subscribe on YouTube ↗</a></section>
 </main><footer><a class="brand" href="#home"><b>FA<span>✦</span></b><span><strong>FLYWITHAARAV</strong><small>VIRTUAL AVIATION</small></span></a><p>Made for the love of flight.<small>Not affiliated with Microsoft or any airline.</small></p><a class="link" href="#home">BACK TO TOP ↑</a><small class="copyright">© <span id="year"></span> FLYWITHAARAV</small></footer>
+<details id="fr24-widget" open><summary>✈ FLIGHT RADAR 24 <span>LIVE MAP　−</span></summary><iframe title="Live aircraft map from Flightradar24" src="https://www.flightradar24.com/simple_index.php?lat=53.48&lon=-2.24&z=7" loading="lazy" referrerpolicy="no-referrer" allowfullscreen></iframe></details>
 <div id="lightbox" class="lightbox" hidden><button id="close" aria-label="Close image">×</button><img id="large" alt="Expanded gallery photo"></div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="auth-main.js"></script><script src="script.js"></script>
 </body></html>
