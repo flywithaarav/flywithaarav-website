@@ -11,8 +11,7 @@ const form=document.getElementById("egg-form"),status=document.getElementById("s
 async function init(){
  const {data:{session}}=await db.auth.getSession();
  if(!session){document.getElementById("login-note").innerHTML='Please <a style="color:#7be0d0" href="auth.html?mode=signin">sign in</a> with your FlyWithAarav account first.';return;}
- const {data:role,error:roleError}=await db.from("user_roles").select("role").eq("user_id",session.user.id).maybeSingle();
- if(roleError||role?.role!=="admin"){document.getElementById("login-note").textContent="This editor is restricted to the site administrator account.";return;}
+ if((session.user.email||"").toLowerCase()!=="flywithaarav@gmail.com"){document.getElementById("login-note").textContent="This editor is restricted to the site administrator account. Please sign in with the administrator email.";return;}
  document.getElementById("login-note").textContent="Signed in as site administrator.";
  document.getElementById("editor").hidden=false;
  const {data,error}=await db.from("site_easter_egg").select("*").eq("id",1).single();
