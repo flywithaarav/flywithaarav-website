@@ -5,7 +5,7 @@
   const signupLink = document.getElementById("auth-signup-link");
   const loginLink = document.getElementById("auth-login-link");
   const signedIn = document.getElementById("signed-in-account");
-  const emailLink = document.getElementById("account-email-link");
+  const accountLink = document.getElementById("account-email-link");
   const signOutButton = document.getElementById("main-signout");
   if (!window.supabase || !link || !signedIn || !signOutButton) return;
 
@@ -13,18 +13,23 @@
     auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
   });
 
-  function renderSession(session) {
+  async function renderSession(session) {
     const user = session && session.user;
     link.hidden = Boolean(user);
     if (signupLink) signupLink.hidden = Boolean(user);
     if (loginLink) loginLink.hidden = Boolean(user);
     signedIn.hidden = !user;
     signedIn.style.display = user ? "inline-flex" : "none";
-    if (user) {
-      emailLink.textContent = user.email || "My account";
-      emailLink.href = "auth.html";
-      emailLink.title = "View your account details";
-    }
+    if (!user) return;
+
+    let displayName = user.user_metadata?.display_name || user.user_metadata?.full_name || "";
+    try {
+      const { data } = await client.from("profiles").select("display_name").eq("id", user.id).maybeSingle();
+      if (data?.display_name?.trim()) displayName = data.display_name.trim();
+    } catch (_) {}
+    accountLink.textContent = displayName || "My account";
+    accountLink.href = "profile.html";
+    accountLink.title = "View your profile";
   }
 
   client.auth.getSession().then(({ data }) => renderSession(data.session));
