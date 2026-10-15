@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#07111f"><meta name="description" content="FlyWithAarav — Microsoft Flight Simulator flights, aircraft and aviation videos.">
+<meta name="theme-color" content="#07111f"><meta name="description" content="FlyWithAarav — Microsoft Flight Simulator flights, aircraft and aviation videos."><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./app-icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="./app-icon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>FlyWithAarav | Virtual skies. Real passion.</title><link rel="stylesheet" href="style.css"><style>
 #fr24-widget{position:fixed;right:16px;bottom:16px;z-index:30;max-width:calc(100vw - 32px);font-family:var(--body)}
 #fr24-widget a{display:flex;align-items:center;gap:10px;padding:12px 15px;border:1px solid #7be0d077;border-radius:8px;background:#0d1b2c;color:#f4f7fb;box-shadow:0 8px 30px #0008;font-size:11px;font-weight:700;letter-spacing:.6px}
@@ -25,4 +25,4 @@
 </main><footer><a class="brand" href="#home"><b>FA<span>✦</span></b><span><strong>FLYWITHAARAV</strong><small>VIRTUAL AVIATION</small></span></a><p>Made for the love of flight.<small>Not affiliated with Microsoft or any airline.</small></p><a class="link" href="cms-home.html">EDIT HOMEPAGE</a><a class="link" href="#home">BACK TO TOP ↑</a><small class="copyright">© <span id="year"></span> FLYWITHAARAV</small></footer>
 <div id="fr24-widget"><a href="https://www.flightradar24.com/53.48,-2.24/7" target="_blank" rel="noopener noreferrer" aria-label="Open live aircraft tracking on Flightradar24">✈ <span>FLIGHT RADAR 24</span> ↗</a></div>
 <div id="lightbox" class="lightbox" hidden><button id="close" aria-label="Close image">×</button><img id="large" alt="Expanded gallery photo"></div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="homepage-cms.js"></script><script src="auth-main.js"></script><script src="script.js"></script><script src="easter-egg.js"></script>
-</body></html>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(err=>console.warn("PWA service worker registration failed",err)));}</script>\n</body></html>
