@@ -75,7 +75,8 @@ async function loadEditableContent(){
     setLink(document.querySelector('.subscribe .button'),yt);
     setLink(document.querySelector('.about .button'),yt);
     setLink(document.querySelector('footer .brand'), '#home');
-    const navButton=document.querySelector('nav .navbutton');setLink(navButton,yt,'YouTube ↗');
+    const navButton=document.querySelector('nav a.navbutton');
+    setLink(navButton,yt,'YouTube ↗');
   }catch(error){console.warn('FlyWithAarav content file could not be loaded; showing built-in page content.',error)}
 }
 loadEditableContent();
