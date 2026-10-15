@@ -33,7 +33,7 @@ window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();def
 button.addEventListener('click',async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;button.hidden=true;return}
 const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
 const isEdgeOrChrome=/edg|chrome/i.test(navigator.userAgent);
-alert(isIOS?'To add FlyWithAarav to your Home Screen: open this website in Safari, tap Share, then choose “Add to Home Screen”.':isEdgeOrChrome?'In Microsoft Edge or Chrome, open the browser menu (⋯), then choose “Apps” or “Install FlyWithAarav” / “Install this site as an app”.':'Open this site in Microsoft Edge or Chrome and use the browser menu to install the site as an app.');
+alert(isIOS?'iPhone/iPad: if you are not in Safari, open this page in Safari. Tap Share (the square with the up arrow), scroll down and tap “Add to Home Screen”, then tap “Add”. The FlyWithAarav icon will appear on your Home Screen.':/android/i.test(navigator.userAgent)?'Android: in Chrome, tap ⋮ and choose “Install app” or “Add to Home screen”, then confirm. The FlyWithAarav icon will appear with your other apps. If an install prompt appears, you can use that instead.':isEdgeOrChrome?'On a computer, open the browser menu (⋯), then choose “Apps” or “Install FlyWithAarav” / “Install this site as an app”.':'Open this site in Safari on iPhone/iPad, or Chrome on Android, then use the browser menu/share options to add it to your Home Screen.');
 });
 window.addEventListener('appinstalled',()=>{button.hidden=true;button.textContent='APP INSTALLED'});
 })();
