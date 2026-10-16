@@ -105,7 +105,9 @@
           showOnly("verify-panel");
           $("signup-note").hidden = false;
           showMessage("Account created. Enter the 6-digit code from your confirmation email.");
-          $("code").value = "";\n          syncOtp();\n          $("code").focus();
+          $("code").value = "";
+          syncOtp();
+          $("code").focus();
           otpStatus("Enter all 6 digits");
         }
       }
