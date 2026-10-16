@@ -18,6 +18,20 @@
 .account-message.error{color:#ffb6a9}
 .account-foot{font-size:10px;color:#9aabba;margin-top:22px}
 .account-foot a,.text-button{color:#7be0d0}
+.verify-stage{position:relative;isolation:isolate;overflow:hidden;padding:22px 16px 18px;margin:12px 0 4px;border:1px solid #ffffff18;background:linear-gradient(145deg,#10243a,#091625);border-radius:12px}
+.verify-bubbles{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.verify-bubbles span{position:absolute;width:8px;height:8px;border-radius:50%;background:#7be0d0;opacity:.35;box-shadow:0 0 16px #7be0d088;animation:floatBubble 5s ease-in-out infinite}
+.verify-bubbles span:nth-child(1){left:12%;top:18%;animation-delay:-1s}.verify-bubbles span:nth-child(2){left:78%;top:30%;width:5px;height:5px;animation-delay:-2s}.verify-bubbles span:nth-child(3){left:52%;top:76%;width:6px;height:6px;animation-delay:-3s}.verify-bubbles span:nth-child(4){left:90%;top:70%;animation-delay:-.5s}.verify-bubbles span:nth-child(5){left:30%;top:55%;width:4px;height:4px;animation-delay:-4s}
+@keyframes floatBubble{0%,100%{transform:translateY(0) scale(.8);opacity:.2}50%{transform:translateY(-12px) scale(1.2);opacity:.7}}
+.otp-fields{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:16px 0 12px}
+.otp-fields input{min-width:0;text-align:center;padding:12px 0;font-size:clamp(20px,5vw,27px);font-weight:800;font-family:var(--display,Impact,sans-serif);border-radius:9px;border:1px solid #ffffff30;background:#07111f;color:#f4f7fb;transition:border-color .18s,box-shadow .18s,transform .18s}
+.otp-fields input:focus{border-color:#7be0d0;box-shadow:0 0 0 3px #7be0d01c;transform:translateY(-2px);outline:none}
+.otp-fields input.filled{border-color:#7be0d077;background:#102a38}
+.verify-status{display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.7px;color:#9aabba;margin-top:12px}
+.verify-status .dot{width:7px;height:7px;border-radius:50%;background:#7be0d0;box-shadow:0 0 10px #7be0d066}
+.verify-status.error{color:#ffb6a9}.verify-status.error .dot{background:#ff8d7d;box-shadow:0 0 10px #ff8d7d66}
+.verify-status.success{color:#7be0d0}
+@media(max-width:380px){.otp-fields{gap:5px}.otp-fields input{font-size:20px}}
 .auth-switch{display:flex;gap:10px;margin:18px 0 8px}
 .auth-switch button,.text-button{background:none;border:0;cursor:pointer;font:inherit;font-size:11px;padding:8px 0}
 .auth-switch button{color:#9aabba;border-bottom:1px solid transparent;flex:1}
