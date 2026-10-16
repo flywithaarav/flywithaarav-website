@@ -1,0 +1,55 @@
+{
+  "name": "flywithaarav-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FlyWithAarav native mobile and Windows desktop app",
+  "scripts": {
+    "build:web": "node scripts/copy-web.mjs",
+    "cap:android": "npm run build:web && cap sync android",
+    "cap:ios": "npm run build:web && cap sync ios",
+    "cap:add:android": "cap add android",
+    "cap:add:ios": "cap add ios",
+    "desktop": "npm run build:web && electron .",
+    "dist:win": "npm run build:web && electron-builder --win nsis"
+  },
+  "dependencies": {
+    "@capacitor/core": "^8.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.0.0",
+    "@capacitor/android": "^8.0.0",
+    "@capacitor/ios": "^8.0.0",
+    "electron": "^39.0.0",
+    "electron-builder": "^26.0.0"
+  },
+  "main": "main.cjs",
+  "build": {
+    "appId": "com.flywithaarav.desktop",
+    "productName": "FlyWithAarav",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.cjs",
+      "www/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/app-icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}
