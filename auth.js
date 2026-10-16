@@ -54,7 +54,7 @@
   const otpInputs = Array.from(document.querySelectorAll(".otp-digit"));
   const otpBoxes = Array.from(document.querySelectorAll(".otp-box"));
   function syncOtp() {
-    const token = ($("code").value || "").replace(/\\D/g, "").slice(0, 6);
+    const token = ($("code").value || "").replace(/\D/g, "").slice(0, 6);
     if ($("code").value !== token) $("code").value = token;
     otpBoxes.forEach((box, i) => {
       box.textContent = token[i] || "";
@@ -119,7 +119,7 @@
   $("verify-panel").addEventListener("submit", async (event) => {
     event.preventDefault();
     syncOtp();
-    const token = ($("code").value || "").replace(/\\D/g, "").slice(0, 6);
+    const token = ($("code").value || "").replace(/\D/g, "").slice(0, 6);
     if (!/^[0-9]{6}$/.test(token)) { otpStatus("Enter all 6 digits", "error"); otpInputs.find(input => !input.value)?.focus(); return; }
     const button = $("verify-panel").querySelector("button");
     button.disabled = true;
