@@ -8,8 +8,12 @@
  db.from("site_homepage_content").select("content").eq("id",1).maybeSingle().then(({data})=>{
   const c=data?.content;if(!c)return;
   const colour=typeof c.background_colour==="string"&&/^#[0-9a-f]{6}$/i.test(c.background_colour)?c.background_colour:"#07111f";
-  document.documentElement.style.setProperty("--bg",colour);
-  document.body.style.backgroundColor=colour;
+  const panel=typeof c.panel_colour==="string"&&/^#[0-9a-f]{6}$/i.test(c.panel_colour)?c.panel_colour:"#0d1b2c";
+  const ink=typeof c.text_colour==="string"&&/^#[0-9a-f]{6}$/i.test(c.text_colour)?c.text_colour:"#f4f7fb";
+  const accent=typeof c.accent_colour==="string"&&/^#[0-9a-f]{6}$/i.test(c.accent_colour)?c.accent_colour:"#7be0d0";
+  document.documentElement.style.setProperty("--bg",colour);document.documentElement.style.setProperty("--panel",panel);document.documentElement.style.setProperty("--text",ink);document.documentElement.style.setProperty("--accent",accent);document.documentElement.style.setProperty("--muted",ink+"aa");document.documentElement.style.setProperty("--line",ink+"24");
+  document.body.style.backgroundColor=colour;document.body.style.color=ink;
+  let theme=document.getElementById("dynamic-site-theme");if(!theme){theme=document.createElement("style");theme.id="dynamic-site-theme";document.head.appendChild(theme);}theme.textContent=".card,.fleet article,.flightnote{background-color:"+panel+"e8!important;border-color:"+accent+"55!important}.ticker,.subscribe{background-color:"+accent+"!important;color:"+colour+"!important}.button:not(.ghost),.navbutton{background-color:"+accent+"!important;color:"+colour+"!important}.eyebrow,.link,.cardbody label{color:"+accent+"!important}.hero{background-color:"+colour+"!important}.about{background-color:"+panel+"!important}";
   const background=safeImage(c.background_url);
   if(background){document.body.style.backgroundImage="linear-gradient(#07111f66,#07111f66),url("+JSON.stringify(background)+")";document.body.style.backgroundAttachment="fixed";document.body.style.backgroundSize="cover";document.body.style.backgroundPosition="center";}
   const icon=safeImage(c.app_icon_url);
