@@ -7,9 +7,12 @@
  const safeUrl=v=>typeof v==="string"&&v.startsWith("https://")?v:"";const safeImage=v=>typeof v==="string"&&(v.startsWith("https://")||/^data:image\/(png|jpeg|webp|gif|svg\+xml);base64,/i.test(v))?v:"";
  db.from("site_homepage_content").select("content").eq("id",1).maybeSingle().then(({data})=>{
   const c=data?.content;if(!c)return;
-  const background=safeUrl(c.background_url);
-  if(background){document.body.style.backgroundImage="linear-gradient(#07111f88,#07111f88),url("+JSON.stringify(background)+")";document.body.style.backgroundAttachment="fixed";document.body.style.backgroundSize="cover";document.body.style.backgroundPosition="center";}
-  const icon=safeUrl(c.app_icon_url);
+  const colour=typeof c.background_colour==="string"&&/^#[0-9a-f]{6}$/i.test(c.background_colour)?c.background_colour:"#07111f";
+  document.documentElement.style.setProperty("--bg",colour);
+  document.body.style.backgroundColor=colour;
+  const background=safeImage(c.background_url);
+  if(background){document.body.style.backgroundImage="linear-gradient(#07111f66,#07111f66),url("+JSON.stringify(background)+")";document.body.style.backgroundAttachment="fixed";document.body.style.backgroundSize="cover";document.body.style.backgroundPosition="center";}
+  const icon=safeImage(c.app_icon_url);
   if(icon){document.querySelectorAll('link[rel="icon"],link[rel="apple-touch-icon"]').forEach(link=>link.href=icon);}
   text(".hero-content .eyebrow",c.hero_eyebrow);
   const h=document.querySelector(".hero-content h1");if(h){h.replaceChildren();const first=document.createElement("span");first.textContent=c.hero_title||"";const br=document.createElement("br");const em=document.createElement("em");em.textContent=c.hero_emphasis||"";h.append(first,br,em);}
