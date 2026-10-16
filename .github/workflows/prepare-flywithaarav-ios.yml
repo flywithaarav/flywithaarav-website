@@ -1,0 +1,33 @@
+name: Prepare FlyWithAarav iOS project
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "app/**"
+      - ".github/workflows/prepare-flywithaarav-ios.yml"
+
+jobs:
+  ios-project:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install app dependencies
+        working-directory: app
+        run: npm install
+      - name: Generate iOS project
+        working-directory: app
+        run: npx cap add ios
+      - name: Copy website and sync iOS project
+        working-directory: app
+        run: npm run cap:ios
+      - name: Archive Xcode project source
+        run: cd app && zip -r ../FlyWithAarav-iOS-Xcode-project.zip ios capacitor.config.ts package.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FlyWithAarav-iOS-Xcode-project
+          path: FlyWithAarav-iOS-Xcode-project.zip
+          if-no-files-found: error
