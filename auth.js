@@ -52,9 +52,15 @@
   }
 
   const otpInputs = Array.from(document.querySelectorAll(".otp-digit"));
+  const otpBoxes = Array.from(document.querySelectorAll(".otp-box"));
   function syncOtp() {
-    $("code").value = otpInputs.map(input => input.value).join("");
-    otpInputs.forEach(input => input.classList.toggle("filled", Boolean(input.value)));
+    const token = ($("code").value || "").replace(/\\D/g, "").slice(0, 6);
+    if ($("code").value !== token) $("code").value = token;
+    otpBoxes.forEach((box, i) => {
+      box.textContent = token[i] || "";
+      box.classList.toggle("filled", Boolean(token[i]));
+      box.classList.toggle("active", i === Math.min(token.length, 5) && token.length < 6);
+    });
   }
   function otpStatus(message, kind = "") {
     const box = $("verify-status");
@@ -63,28 +69,12 @@
     if (kind) box.classList.add(kind);
     $("verify-status-text").textContent = message;
   }
-  otpInputs.forEach((input, index) => {
-    input.addEventListener("input", () => {
-      input.value = input.value.replace(/\D/g, "").slice(-1);
-      syncOtp();
-      if (input.value && index < otpInputs.length - 1) otpInputs[index + 1].focus();
-      otpStatus($("code").value.length === 6 ? "Code ready to verify" : "Enter all 6 digits");
-    });
-    input.addEventListener("keydown", event => {
-      if (event.key === "Backspace" && !input.value && index > 0) otpInputs[index - 1].focus();
-      if (event.key === "ArrowLeft" && index > 0) otpInputs[index - 1].focus();
-      if (event.key === "ArrowRight" && index < otpInputs.length - 1) otpInputs[index + 1].focus();
-    });
-    input.addEventListener("paste", event => {
-      const pasted = (event.clipboardData || window.clipboardData).getData("text").replace(/\D/g, "").slice(0, 6);
-      if (!pasted) return;
-      event.preventDefault();
-      otpInputs.forEach((digit, i) => digit.value = pasted[i] || "");
-      syncOtp();
-      otpInputs[Math.min(pasted.length, 5)].focus();
-      otpStatus(pasted.length === 6 ? "Code ready to verify" : "Enter all 6 digits");
-    });
+  $("code").addEventListener("input", () => {
+    syncOtp();
+    otpStatus($("code").value.length === 6 ? "Code ready to verify" : "Enter all 6 digits");
   });
+  $("otp-entry-wrap").addEventListener("click", () => $("code").focus());
+  syncOtp();
 
   $("show-signin").addEventListener("click", () => setMode("signin"));
   $("show-signup").addEventListener("click", () => setMode("signup"));
@@ -116,7 +106,7 @@
           showOnly("verify-panel");
           $("signup-note").hidden = false;
           showMessage("Account created. Enter the 6-digit code from your confirmation email.");
-          otpInputs[0]?.focus();
+          $("code").value = "";\n          syncOtp();\n          $("code").focus();
           otpStatus("Enter all 6 digits");
         }
       }
@@ -130,7 +120,7 @@
   $("verify-panel").addEventListener("submit", async (event) => {
     event.preventDefault();
     syncOtp();
-    const token = $("code").value.trim();
+    const token = ($("code").value || "").replace(/\\D/g, "").slice(0, 6);
     if (!/^[0-9]{6}$/.test(token)) { otpStatus("Enter all 6 digits", "error"); otpInputs.find(input => !input.value)?.focus(); return; }
     const button = $("verify-panel").querySelector("button");
     button.disabled = true;
