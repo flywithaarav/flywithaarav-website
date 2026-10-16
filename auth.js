@@ -73,7 +73,6 @@
     syncOtp();
     otpStatus($("code").value.length === 6 ? "Code ready to verify" : "Enter all 6 digits");
   });
-  $("otp-entry-wrap").addEventListener("click", () => $("code").focus());
   syncOtp();
 
   $("show-signin").addEventListener("click", () => setMode("signin"));
