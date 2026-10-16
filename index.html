@@ -37,4 +37,6 @@ alert(isIOS?'iPhone/iPad: if you are not in Safari, open this page in Safari. Ta
 });
 window.addEventListener('appinstalled',()=>{button.hidden=true;button.textContent='APP INSTALLED'});
 })();
-</script>\n<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(err=>console.warn("PWA service worker registration failed",err)));}</script>\n</body></html>
+</script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(err=>console.warn("PWA service worker registration failed",err)));}</script>
+</body></html>
