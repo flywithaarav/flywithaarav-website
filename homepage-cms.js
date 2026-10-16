@@ -4,7 +4,7 @@
  if(!window.supabase)return;
  const db=window.supabase.createClient(URL,KEY);
  const text=(sel,v)=>{const el=document.querySelector(sel);if(el&&v!==undefined)el.textContent=v;};
- const safeUrl=v=>typeof v==="string"&&v.startsWith("https://")?v:"";
+ const safeUrl=v=>typeof v==="string"&&v.startsWith("https://")?v:"";const safeImage=v=>typeof v==="string"&&(v.startsWith("https://")||/^data:image\/(png|jpeg|webp|gif|svg\+xml);base64,/i.test(v))?v:"";
  db.from("site_homepage_content").select("content").eq("id",1).maybeSingle().then(({data})=>{
   const c=data?.content;if(!c)return;
   const background=safeUrl(c.background_url);
