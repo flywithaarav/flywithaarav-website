@@ -42,8 +42,7 @@
             "x64"
           ]
         }
-      ],
-      "icon": "assets/app-icon.ico"
+      ]
     },
     "nsis": {
       "oneClick": false,
