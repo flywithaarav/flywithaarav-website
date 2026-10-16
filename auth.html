@@ -64,14 +64,7 @@
 </div>
 <form id="verify-panel" hidden>
 <label>6-digit email verification code</label>
-<div class="verify-stage"><div class="verify-bubbles" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div><p class="sub" style="margin:0">Enter the code sent to your inbox.</p><div class="otp-entry-wrap" id="otp-entry-wrap"><div class="otp-fields" id="otp-fields" role="group" aria-label="Six digit verification code"><span class="otp-box" data-digit="0" aria-hidden="true"></span><span class="otp-box" data-digit="1" aria-hidden="true"></span><span class="otp-box" data-digit="2" aria-hidden="true"></span><span class="otp-box" data-digit="3" aria-hidden="true"></span><span class="otp-box" data-digit="4" aria-hidden="true"></span><span class="otp-box" data-digit="5" aria-hidden="true"></span></div><input id="code" class="otp-single otp-capture" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" aria-label="Six digit verification code" required></div><div class="otp-fields" id="legacy-otp-fields" hidden>
-<input type="text" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Digit 1" autocomplete="one-time-code" class="otp-digit" required>
-<input type="text" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Digit 2" autocomplete="off" class="otp-digit" required>
-<input type="text" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Digit 3" autocomplete="off" class="otp-digit" required>
-<input type="text" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Digit 4" autocomplete="off" class="otp-digit" required>
-<input type="text" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Digit 5" autocomplete="off" class="otp-digit" required>
-<input type="text" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Digit 6" autocomplete="off" class="otp-digit" required>
-</div><div id="verify-status" class="verify-status"><span class="dot"></span><span id="verify-status-text">Waiting for your code</span></div></div>
+<div class="verify-stage"><div class="verify-bubbles" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div><p class="sub" style="margin:0">Enter the code sent to your inbox.</p><label for="code">6-digit email verification code</label><input id="code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="123456" required><div id="verify-status" class="verify-status"><span class="dot"></span><span id="verify-status-text">Waiting for your code</span></div></div>
 
 <button class="button" type="submit">VERIFY EMAIL ↗</button>
 </form>
