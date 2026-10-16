@@ -64,7 +64,7 @@
 </div>
 <form id="verify-panel" hidden>
 <label>6-digit email verification code</label>
-<div class="verify-stage"><div class="verify-bubbles" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div><p class="sub" style="margin:0">Enter the code sent to your inbox.</p><label for="code">6-digit email verification code</label><input id="code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="123456" required><div id="verify-status" class="verify-status"><span class="dot"></span><span id="verify-status-text">Waiting for your code</span></div></div>
+<div class="verify-stage"><div class="verify-bubbles" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div><p class="sub" style="margin:0">Enter the code sent to your inbox.</p><label for="code">6-digit email verification code</label><input id="code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="123456" required><div id="verify-status" class="verify-status"><span class="dot"></span><span id="verify-status-text">Waiting for your code</span></div></div>
 
 <button class="button" type="submit">VERIFY EMAIL ↗</button>
 </form>
