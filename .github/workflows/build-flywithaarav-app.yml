@@ -17,6 +17,10 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: app/package.json
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
       - name: Install app dependencies
         working-directory: app
         run: npm install
