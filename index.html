@@ -88,4 +88,4 @@ button?.addEventListener("click",async()=>{button.textContent="Updating…";try{
 fetch("./version.json?check="+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():null).then(data=>{if(data&&data.version&&data.version!==CURRENT_VERSION){if(overlay){document.getElementById("faa-update-title").textContent="Website update required";document.getElementById("faa-update-message").textContent="You're using version "+CURRENT_VERSION+". Version "+data.version+" is now available. Please update to continue.";overlay.classList.add("faa-update-visible")}}}).catch(()=>{});
 })();
 </script>
-</body></html>
+<script src="ban-check.js"></script></body></html>
