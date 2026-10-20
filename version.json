@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.2.1",
   "released": "2026-10-20",
   "required": true,
   "releaseNotesUrl": "./updates.html",
@@ -7,6 +7,7 @@
     "Added a Skip loading button after 1.5 seconds.",
     "Added admin-published release notes.",
     "Added website-level user bans and a banned-user screen.",
-    "Updated authentication redirects to https://flywithaarav.great-site.net/."
+    "Updated authentication redirects to https://flywithaarav.great-site.net/.",
+    "Improved Home Screen app updates by checking for newer website files online."
   ]
 }
