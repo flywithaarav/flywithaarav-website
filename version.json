@@ -1,11 +1,12 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "released": "2026-10-20",
   "required": true,
   "releaseNotesUrl": "./updates.html",
   "notes": [
-    "Added animated loading-screen plane departure and fade-out.",
-    "Added a visible website version badge and release notes page.",
-    "Added a version check that prompts visitors to refresh when a newer version is available."
+    "Added a Skip loading button after 1.5 seconds.",
+    "Added admin-published release notes.",
+    "Added website-level user bans and a banned-user screen.",
+    "Updated authentication redirects to https://flywithaarav.great-site.net/."
   ]
 }
