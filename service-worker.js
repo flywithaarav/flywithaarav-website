@@ -1,4 +1,5 @@
-const CACHE_NAME = "flywithaarav-shell-v1-2-1";
+// FlyWithAarav PWA cache: check the network first so uploaded updates appear promptly.
+const CACHE_NAME = "flywithaarav-shell-v1-2-2";
 const APP_SHELL = ["./", "./index.html", "./style.css", "./app-icon.svg", "./manifest.webmanifest", "./version.json", "./updates.html", "./ban-check.js"];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
@@ -12,15 +13,19 @@ self.addEventListener("fetch", event => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
   if (url.pathname.includes("/rest/") || url.pathname.includes("/auth/")) return;
-  if (request.mode === "navigate") {
-    event.respondWith(fetch(request).then(response => {
-      if (response.ok) caches.open(CACHE_NAME).then(cache => cache.put(request, response.clone()));
-      return response;
-    }).catch(async () => (await caches.match(request)) || (await caches.match("./index.html"))));
+
+  // Always check for the latest version metadata; never serve a stale version.json.
+  if (url.pathname.endsWith("/version.json")) {
+    event.respondWith(fetch(request, { cache: "no-store" }).catch(() => caches.match(request)));
     return;
   }
-  event.respondWith(caches.match(request).then(cached => cached || fetch(request).then(response => {
-    if (response.ok) caches.open(CACHE_NAME).then(cache => cache.put(request, response.clone()));
+
+  // Network-first for pages and assets, with cached fallback for offline use.
+  event.respondWith(fetch(request, { cache: "no-cache" }).then(response => {
+    if (response.ok) {
+      const copy = response.clone();
+      caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+    }
     return response;
-  })));
+  }).catch(async () => (await caches.match(request)) || (request.mode === "navigate" ? await caches.match("./index.html") : Response.error())));
 });
