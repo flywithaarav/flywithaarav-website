@@ -21,7 +21,7 @@
 .faa-loader-wordmark{margin-top:25px;font-family:'Barlow Condensed',Impact,sans-serif;font-size:25px;font-weight:800;letter-spacing:4px}
 .faa-loader-caption{margin-top:7px;color:#7be0d0;font-size:9px;letter-spacing:2.5px;font-weight:700}
 .faa-loader-track{width:170px;height:2px;margin-top:26px;background:#ffffff20;overflow:hidden}
-.faa-loader-track span{display:block;width:45%;height:100%;background:#7be0d0;animation:faa-progress 1.1s ease-in-out infinite alternate}
+.faa-loader-track span{display:block;width:45%;height:100%;background:#7be0d0;animation:faa-progress 1.1s ease-in-out infinite alternate}\n#faa-skip-loading{margin-top:22px;padding:10px 14px;border:1px solid #7be0d077;border-radius:7px;background:#10243a;color:#7be0d0;font:700 11px system-ui,sans-serif;letter-spacing:1px;cursor:pointer;opacity:0;animation:faa-skip-appear .25s ease forwards}\n#faa-skip-loading:hover{background:#19334b;color:#fff}\n@keyframes faa-skip-appear{to{opacity:1}}
 @keyframes faa-spin{to{transform:rotate(360deg)}}
 @keyframes faa-progress{from{transform:translateX(-10%)}to{transform:translateX(145%)}}
 @media(prefers-reduced-motion:reduce){.faa-loader-icon:not(.faa-plane-departing),.faa-loader-track span{animation:none}#faa-loader{transition:opacity .2s ease,visibility .2s ease}}
@@ -38,7 +38,7 @@
 <body>
 <a id="faa-version-badge" href="updates.html" aria-label="View website version and release notes">VERSION 1.1.0 · UPDATE NOTES</a>
 <div id="faa-update-overlay" role="dialog" aria-modal="true" aria-labelledby="faa-update-title"><div class="faa-update-card"><p class="eyebrow">FLYWITHAARAV UPDATE</p><h2 id="faa-update-title">A new version is ready</h2><p id="faa-update-message">Please update to continue using the latest version of FlyWithAarav.</p><button id="faa-update-button" type="button">Update website</button></div></div>
-<div id="faa-loader" role="status" aria-label="Loading FlyWithAarav"><div class="faa-loader-inner"><img src="./app-icon.svg" alt="" class="faa-loader-icon"><div class="faa-loader-wordmark">FLYWITHAARAV</div><div class="faa-loader-caption">PREPARING FOR TAKEOFF</div><div class="faa-loader-track"><span></span></div></div></div>
+<div id="faa-loader" role="status" aria-label="Loading FlyWithAarav"><div class="faa-loader-inner"><img src="./app-icon.svg" alt="" class="faa-loader-icon"><div class="faa-loader-wordmark">FLYWITHAARAV</div><div class="faa-loader-caption">PREPARING FOR TAKEOFF</div><div class="faa-loader-track"><span></span></div><button id="faa-skip-loading" type="button" hidden>Skip loading ↗</button></div></div>
 <div class="topline">✦ FLIGHT DECK ONLINE <span>/</span> MSFS • AVIATION • DISCOVERY</div>
 <header><a class="brand" href="#home"><b>FA<span>✦</span></b><span><strong>FLYWITHAARAV</strong><small>VIRTUAL AVIATION</small></span></a><button id="menu" aria-label="Toggle navigation">☰</button><nav id="nav"><a href="#flights">Flights</a><a href="#fleet">Aircraft</a><a href="#gallery">Gallery</a><a href="#about">About</a><a href="flight-hub.html">Flight tools</a><a href="community.html">Community</a><a href="auth.html?mode=signup" id="auth-signup-link">Sign up</a><a href="auth.html?mode=signin" id="auth-login-link">Log in</a><a href="auth.html" id="account-link" hidden>Account</a><span id="signed-in-account" hidden><a href="auth.html" id="account-email-link">My account</a> <button id="main-signout" type="button" class="navbutton">Sign out</button></span><a class="navbutton" href="https://www.youtube.com/@flywithaarav" target="_blank" rel="noopener">YouTube ↗</a></nav></header>
 <main>
@@ -67,11 +67,7 @@ window.addEventListener('appinstalled',()=>{button.hidden=true;button.textConten
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(err=>console.warn("PWA service worker registration failed",err)));}</script>
 <script>
-(()=>{const loader=document.getElementById('faa-loader');if(!loader)return;
-const hide=()=>{loader.classList.add('faa-loader-hide');window.setTimeout(()=>loader.remove(),700)};
-window.setTimeout(()=>{const plane=loader.querySelector('.faa-loader-icon');if(plane)plane.classList.add('faa-plane-departing')},2800);
-window.setTimeout(hide,5300);
-})();
+(()=>{const loader=document.getElementById('faa-loader');if(!loader)return;\nconst skip=document.getElementById('faa-skip-loading');let finished=false;\nconst hide=()=>{if(finished)return;finished=true;loader.classList.add('faa-loader-hide');window.setTimeout(()=>loader.remove(),700)};\nif(skip)window.setTimeout(()=>{if(!finished)skip.hidden=false},1500);\nif(skip)skip.addEventListener('click',hide);\nwindow.setTimeout(()=>{if(finished)return;const plane=loader.querySelector('.faa-loader-icon');if(plane)plane.classList.add('faa-plane-departing')},2800);\nwindow.setTimeout(hide,5300);\n})();
 </script>
 
 <script>
