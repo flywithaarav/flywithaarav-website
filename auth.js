@@ -75,6 +75,22 @@
   });
   syncOtp();
 
+  $("google-signin").addEventListener("click", async () => {
+    const button = $("google-signin");
+    button.disabled = true;
+    showMessage("Connecting to Google…");
+    try {
+      const { error } = await client.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: SITE_URL + "auth.html" }
+      });
+      if (error) throw error;
+    } catch (error) {
+      showMessage(error.message || "Google sign-in couldn't start. Please try again.", true);
+      button.disabled = false;
+    }
+  });
+
   $("show-signin").addEventListener("click", () => setMode("signin"));
   $("show-signup").addEventListener("click", () => setMode("signup"));
 
