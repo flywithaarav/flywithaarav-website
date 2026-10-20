@@ -15,14 +15,14 @@
 #faa-loader{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:#07111f;color:#f4f7fb;opacity:1;visibility:visible;transition:opacity .65s ease,visibility .65s ease}
 #faa-loader.faa-loader-hide{opacity:0;visibility:hidden;pointer-events:none}
 .faa-loader-inner{display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px}
-.faa-loader-icon{width:86px;height:86px;object-fit:contain;animation:faa-spin 1.15s cubic-bezier(.4,0,.2,1) infinite}
+.faa-loader-icon{width:86px;height:86px;object-fit:contain;animation:faa-spin 1.15s cubic-bezier(.4,0,.2,1) infinite;transform-origin:center center;will-change:transform,opacity}\n.faa-loader-icon.faa-plane-departing{animation:faa-plane-depart 1.8s cubic-bezier(.45,0,.8,.35) forwards}\n@keyframes faa-plane-depart{0%{transform:translate(0,0) rotate(0) scale(1);opacity:1}35%{transform:translate(18px,-12px) rotate(20deg) scale(1.05);opacity:1}100%{transform:translate(150px,-135px) rotate(38deg) scale(.25);opacity:0}}
 .faa-loader-wordmark{margin-top:25px;font-family:'Barlow Condensed',Impact,sans-serif;font-size:25px;font-weight:800;letter-spacing:4px}
 .faa-loader-caption{margin-top:7px;color:#7be0d0;font-size:9px;letter-spacing:2.5px;font-weight:700}
 .faa-loader-track{width:170px;height:2px;margin-top:26px;background:#ffffff20;overflow:hidden}
 .faa-loader-track span{display:block;width:45%;height:100%;background:#7be0d0;animation:faa-progress 1.1s ease-in-out infinite alternate}
 @keyframes faa-spin{to{transform:rotate(360deg)}}
 @keyframes faa-progress{from{transform:translateX(-10%)}to{transform:translateX(145%)}}
-@media(prefers-reduced-motion:reduce){.faa-loader-icon,.faa-loader-track span{animation:none}#faa-loader{transition:opacity .2s ease,visibility .2s ease}}
+@media(prefers-reduced-motion:reduce){.faa-loader-icon,.faa-loader-track span{animation:none}.faa-loader-icon.faa-plane-departing{opacity:0}#faa-loader{transition:opacity .2s ease,visibility .2s ease}}
 </style>
 </head>
 <body>
@@ -57,7 +57,7 @@ window.addEventListener('appinstalled',()=>{button.hidden=true;button.textConten
 <script>
 (()=>{const loader=document.getElementById('faa-loader');if(!loader)return;
 const hide=()=>{loader.classList.add('faa-loader-hide');window.setTimeout(()=>loader.remove(),700)};
-window.setTimeout(hide,5000);
+window.setTimeout(()=>{const plane=loader.querySelector('.faa-loader-icon');if(plane)plane.classList.add('faa-plane-departing')},3000);\nwindow.setTimeout(hide,5000);
 })();
 </script>
 </body></html>
