@@ -39,7 +39,7 @@
 </style>
 </head>
 <body>
-<a id="faa-version-badge" href="updates.html" aria-label="View website version and release notes">VERSION 1.1.0 · UPDATE NOTES</a>
+<a id="faa-version-badge" href="updates.html" aria-label="View website version and release notes">VERSION 1.2.0 · UPDATE NOTES</a>
 <div id="faa-update-overlay" role="dialog" aria-modal="true" aria-labelledby="faa-update-title"><div class="faa-update-card"><p class="eyebrow">FLYWITHAARAV UPDATE</p><h2 id="faa-update-title">A new version is ready</h2><p id="faa-update-message">Please update to continue using the latest version of FlyWithAarav.</p><button id="faa-update-button" type="button">Update website</button></div></div>
 <div id="faa-loader" role="status" aria-label="Loading FlyWithAarav"><div class="faa-loader-inner"><img src="./app-icon.svg" alt="" class="faa-loader-icon"><div class="faa-loader-wordmark">FLYWITHAARAV</div><div class="faa-loader-caption">PREPARING FOR TAKEOFF</div><div class="faa-loader-track"><span></span></div><button id="faa-skip-loading" type="button" hidden>Skip loading ↗</button></div></div>
 <div class="topline">✦ FLIGHT DECK ONLINE <span>/</span> MSFS • AVIATION • DISCOVERY</div>
@@ -81,7 +81,7 @@ window.setTimeout(hide,5300);
 </script>
 
 <script>
-(()=>{const CURRENT_VERSION="1.1.0";const badge=document.getElementById("faa-version-badge");if(badge)badge.textContent="VERSION "+CURRENT_VERSION+" · UPDATE NOTES";
+(()=>{const CURRENT_VERSION="1.2.0";const badge=document.getElementById("faa-version-badge");if(badge)badge.textContent="VERSION "+CURRENT_VERSION+" · UPDATE NOTES";
 const overlay=document.getElementById("faa-update-overlay");const button=document.getElementById("faa-update-button");const key="faa-seen-version";
 try{const seen=localStorage.getItem(key);if(seen&&seen!==CURRENT_VERSION){overlay?.classList.add("faa-update-visible");}else{localStorage.setItem(key,CURRENT_VERSION)}}catch(e){}
 button?.addEventListener("click",async()=>{button.textContent="Updating…";try{if("serviceWorker"in navigator){const regs=await navigator.serviceWorker.getRegistrations();await Promise.all(regs.map(reg=>reg.update()));}localStorage.setItem(key,CURRENT_VERSION)}catch(e){}window.location.replace("./updates.html?refresh="+Date.now());window.setTimeout(()=>window.location.replace("./index.html?refresh="+Date.now()),900)});
