@@ -25,9 +25,19 @@
 @keyframes faa-spin{to{transform:rotate(360deg)}}
 @keyframes faa-progress{from{transform:translateX(-10%)}to{transform:translateX(145%)}}
 @media(prefers-reduced-motion:reduce){.faa-loader-icon:not(.faa-plane-departing),.faa-loader-track span{animation:none}#faa-loader{transition:opacity .2s ease,visibility .2s ease}}
+
+#faa-version-badge{position:fixed;right:16px;bottom:76px;z-index:31;padding:7px 10px;border:1px solid #7be0d055;border-radius:7px;background:#0d1b2c;color:#7be0d0;font:700 10px/1.2 system-ui,sans-serif;letter-spacing:.8px;text-decoration:none;box-shadow:0 4px 18px #0006}
+#faa-version-badge:hover{background:#142940;color:#fff}
+#faa-update-overlay{position:fixed;inset:0;z-index:10001;display:none;place-items:center;background:#030914dd;padding:20px}
+#faa-update-overlay.faa-update-visible{display:grid}
+.faa-update-card{width:min(440px,100%);padding:28px;border:1px solid #7be0d066;border-radius:14px;background:#0d1b2c;color:#f4f7fb;box-shadow:0 20px 80px #0009;font-family:system-ui,sans-serif}
+.faa-update-card h2{margin:0 0 10px;font-size:24px}.faa-update-card p{color:#bdc9d8;line-height:1.55}.faa-update-card button{border:0;border-radius:7px;background:#7be0d0;color:#07111f;padding:12px 16px;font-weight:800;cursor:pointer}
+@media(max-width:620px){#faa-version-badge{right:10px;bottom:70px}}
 </style>
 </head>
 <body>
+<a id="faa-version-badge" href="updates.html" aria-label="View website version and release notes">VERSION 1.1.0 · UPDATE NOTES</a>
+<div id="faa-update-overlay" role="dialog" aria-modal="true" aria-labelledby="faa-update-title"><div class="faa-update-card"><p class="eyebrow">FLYWITHAARAV UPDATE</p><h2 id="faa-update-title">A new version is ready</h2><p id="faa-update-message">Please update to continue using the latest version of FlyWithAarav.</p><button id="faa-update-button" type="button">Update website</button></div></div>
 <div id="faa-loader" role="status" aria-label="Loading FlyWithAarav"><div class="faa-loader-inner"><img src="./app-icon.svg" alt="" class="faa-loader-icon"><div class="faa-loader-wordmark">FLYWITHAARAV</div><div class="faa-loader-caption">PREPARING FOR TAKEOFF</div><div class="faa-loader-track"><span></span></div></div></div>
 <div class="topline">✦ FLIGHT DECK ONLINE <span>/</span> MSFS • AVIATION • DISCOVERY</div>
 <header><a class="brand" href="#home"><b>FA<span>✦</span></b><span><strong>FLYWITHAARAV</strong><small>VIRTUAL AVIATION</small></span></a><button id="menu" aria-label="Toggle navigation">☰</button><nav id="nav"><a href="#flights">Flights</a><a href="#fleet">Aircraft</a><a href="#gallery">Gallery</a><a href="#about">About</a><a href="flight-hub.html">Flight tools</a><a href="community.html">Community</a><a href="auth.html?mode=signup" id="auth-signup-link">Sign up</a><a href="auth.html?mode=signin" id="auth-login-link">Log in</a><a href="auth.html" id="account-link" hidden>Account</a><span id="signed-in-account" hidden><a href="auth.html" id="account-email-link">My account</a> <button id="main-signout" type="button" class="navbutton">Sign out</button></span><a class="navbutton" href="https://www.youtube.com/@flywithaarav" target="_blank" rel="noopener">YouTube ↗</a></nav></header>
@@ -61,6 +71,15 @@ window.addEventListener('appinstalled',()=>{button.hidden=true;button.textConten
 const hide=()=>{loader.classList.add('faa-loader-hide');window.setTimeout(()=>loader.remove(),700)};
 window.setTimeout(()=>{const plane=loader.querySelector('.faa-loader-icon');if(plane)plane.classList.add('faa-plane-departing')},2800);
 window.setTimeout(hide,5300);
+})();
+</script>
+
+<script>
+(()=>{const CURRENT_VERSION="1.1.0";const badge=document.getElementById("faa-version-badge");if(badge)badge.textContent="VERSION "+CURRENT_VERSION+" · UPDATE NOTES";
+const overlay=document.getElementById("faa-update-overlay");const button=document.getElementById("faa-update-button");const key="faa-seen-version";
+try{const seen=localStorage.getItem(key);if(seen&&seen!==CURRENT_VERSION){overlay?.classList.add("faa-update-visible");}else{localStorage.setItem(key,CURRENT_VERSION)}}catch(e){}
+button?.addEventListener("click",async()=>{button.textContent="Updating…";try{if("serviceWorker"in navigator){const regs=await navigator.serviceWorker.getRegistrations();await Promise.all(regs.map(reg=>reg.update()));}localStorage.setItem(key,CURRENT_VERSION)}catch(e){}window.location.replace("./updates.html?refresh="+Date.now());window.setTimeout(()=>window.location.replace("./index.html?refresh="+Date.now()),900)});
+fetch("./version.json?check="+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():null).then(data=>{if(data&&data.version&&data.version!==CURRENT_VERSION){if(overlay){document.getElementById("faa-update-title").textContent="Website update required";document.getElementById("faa-update-message").textContent="You're using version "+CURRENT_VERSION+". Version "+data.version+" is now available. Please update to continue.";overlay.classList.add("faa-update-visible")}}}).catch(()=>{});
 })();
 </script>
 </body></html>
