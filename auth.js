@@ -2,7 +2,7 @@
 (() => {
   const SUPABASE_URL = "https://upvkjgwnavtkcsyzwjjn.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_nUSXAIb0eqF7eQuyFYVycw_VHEB3p2k";
-  const SITE_URL = "https://flywithaarav.github.io/flywithaarav-website/";
+  const SITE_URL = "https://flywithaarav.great-site.net/";
   const $ = (id) => document.getElementById(id);
   $("year").textContent = new Date().getFullYear();
 
