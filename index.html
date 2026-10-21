@@ -15,10 +15,9 @@
 #faa-loader{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:#07111f;color:#f4f7fb;opacity:1;visibility:visible;transition:opacity .65s ease,visibility .65s ease}
 #faa-loader.faa-loader-hide{opacity:0;visibility:hidden;pointer-events:none}
 .faa-loader-inner{display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px}
-.faa-loader-icon{width:86px;height:86px;object-fit:contain;animation:faa-spin 2.4s linear infinite;transform-origin:center center;will-change:transform,opacity}
-.faa-loader-icon.faa-plane-ready{animation:faa-plane-rock .5s ease-in-out both!important}
+.faa-loader-icon{width:86px;height:86px;object-fit:contain;animation:faa-spin 1.15s cubic-bezier(.4,0,.2,1) infinite;transform-origin:center center;will-change:transform,opacity}
+.faa-loader-icon.faa-plane-ready{animation:none!important}
 .faa-loader-icon.faa-plane-departing{animation:faa-plane-depart 2.2s cubic-bezier(.18,.72,.22,1) forwards!important}
-@keyframes faa-plane-rock{0%{transform:rotate(0) translateX(0)}25%{transform:rotate(-8deg) translateX(-10px)}50%{transform:rotate(0) translateX(0)}75%{transform:rotate(8deg) translateX(10px)}100%{transform:rotate(0) translateX(0)}}
 @keyframes faa-plane-depart{0%{transform:translate(0,0) rotate(0) scale(1);opacity:1}18%{transform:translate(0,-7px) rotate(-18deg) scale(1.04);opacity:1}38%{transform:translate(12px,-30px) rotate(-15deg) scale(1.02);opacity:1}65%{transform:translate(70px,-86px) rotate(-9deg) scale(.78);opacity:1}100%{transform:translate(190px,-205px) rotate(-5deg) scale(.24);opacity:0}}
 .faa-loader-wordmark{margin-top:25px;font-family:'Barlow Condensed',Impact,sans-serif;font-size:25px;font-weight:800;letter-spacing:4px}
 .faa-loader-caption{margin-top:7px;color:#7be0d0;font-size:9px;letter-spacing:2.5px;font-weight:700}
