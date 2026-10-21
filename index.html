@@ -79,7 +79,8 @@ const skip=document.getElementById('faa-skip-loading');let finished=false;
 const hide=()=>{if(finished)return;finished=true;loader.classList.add('faa-loader-hide');window.setTimeout(()=>loader.remove(),700)};
 if(skip)window.setTimeout(()=>{if(!finished)skip.hidden=false},1500);
 if(skip)skip.addEventListener('click',hide);
-window.setTimeout(()=>{if(finished)return;const plane=loader.querySelector('.faa-loader-icon');if(plane){plane.classList.add('faa-plane-ready')}},2300);\nwindow.setTimeout(()=>{if(finished)return;const plane=loader.querySelector('.faa-loader-icon');if(plane){plane.classList.remove('faa-plane-ready');plane.classList.add('faa-plane-departing')}},2800);
+window.setTimeout(()=>{if(finished)return;const plane=loader.querySelector('.faa-loader-icon');if(plane){plane.classList.add('faa-plane-ready')}},2300);
+window.setTimeout(()=>{if(finished)return;const plane=loader.querySelector('.faa-loader-icon');if(plane){plane.classList.remove('faa-plane-ready');plane.classList.add('faa-plane-departing')}},2800);
 window.setTimeout(hide,5300);
 })();
 </script>
