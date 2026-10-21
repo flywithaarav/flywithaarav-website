@@ -81,7 +81,7 @@ window.setTimeout(hide,5300);
 </script>
 
 <script>
-(()=>{const CURRENT_VERSION="1.2.1";const badge=document.getElementById("faa-version-badge");if(badge)badge.textContent="VERSION "+CURRENT_VERSION+" · UPDATE NOTES";
+(()=>{const CURRENT_VERSION="1.2.1";const badge=document.getElementById("faa-version-badge");if(badge){badge.textContent="VERSION "+CURRENT_VERSION+" · UPDATE NOTES";try{if(window.supabase){const releaseDb=window.supabase.createClient("https://upvkjgwnavtkcsyzwjjn.supabase.co","sb_publishable_nUSXAIb0eqF7eQuyFYVycw_VHEB3p2k");releaseDb.from("site_releases").select("version").eq("published",true).order("published_at",{ascending:false}).limit(1).maybeSingle().then(({data,error})=>{if(!error&&data?.version)badge.textContent="VERSION "+data.version+" · UPDATE NOTES"}).catch(()=>{})}}catch(e){}}
 const overlay=document.getElementById("faa-update-overlay");const button=document.getElementById("faa-update-button");const key="faa-seen-version";
 try{const seen=localStorage.getItem(key);if(seen&&seen!==CURRENT_VERSION){overlay?.classList.add("faa-update-visible");}else{localStorage.setItem(key,CURRENT_VERSION)}}catch(e){}
 button?.addEventListener("click",async()=>{button.textContent="Updating…";try{if("serviceWorker"in navigator){const regs=await navigator.serviceWorker.getRegistrations();await Promise.all(regs.map(reg=>reg.update()));}localStorage.setItem(key,CURRENT_VERSION)}catch(e){}window.location.replace("./index.html?refresh="+Date.now())});
