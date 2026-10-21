@@ -47,6 +47,28 @@ async function init(){
  }
 }
 async function fileToDataUrl(file){if(!file)return null;if(file.size>500*1024)throw new Error("Please choose images smaller than 500 KB each.");return await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(new Error("Could not read selected image."));reader.readAsDataURL(file);});}
-$("cms").addEventListener("submit",async e=>{e.preventDefault();$("save").disabled=true;$("status").textContent="Saving…";try{for(let i=0;i<3;i++){const file=$("flight_file_"+i).files[0];if(file)$("flight_images_"+i).value=await fileToDataUrl(file);}for(let i=0;i<4;i++){const file=$("gallery_file_"+i).files[0];if(file)$("gallery_images_"+i).value=await fileToDataUrl(file);}}catch(err){$("status").textContent=err.message;$("save").disabled=false;return;}const content=collect();for(const k of ["flight_images","gallery_images"]){if(content[k].some(v=>v&&!(v.startsWith("https://")||/^data:image\/(png|jpeg|webp|gif);base64,/i.test(v)))){$("status").textContent="Use HTTPS image URLs or select an image file.";$("save").disabled=false;return;}}if(content.youtube_url&&!content.youtube_url.startsWith("https://")){$("status").textContent="YouTube URL must start with https://";$("save").disabled=false;return;}const {error}=await db.from("site_homepage_content").upsert({id:1,content,updated_at:new Date().toISOString()},{onConflict:"id"});$("status").textContent=error?"Could not save: "+error.message:"Saved! Your homepage will update when refreshed."; $("save").disabled=false;}catch(err){$("status").textContent=err.message||"Could not save homepage.";$("save").disabled=false;}});
+$("cms").addEventListener("submit", async e => {
+ e.preventDefault();
+ const save=$("save"), status=$("status");
+ save.disabled=true; status.textContent="Saving homepage…";
+ try {
+  for(let i=0;i<3;i++){const file=$("flight_file_"+i).files[0];if(file)$("flight_images_"+i).value=await fileToDataUrl(file);}
+  for(let i=0;i<4;i++){const file=$("gallery_file_"+i).files[0];if(file)$("gallery_images_"+i).value=await fileToDataUrl(file);}
+  const content=collect();
+  const validImage=v=>v.startsWith("https://")||["data:image/png;base64,","data:image/jpeg;base64,","data:image/webp;base64,","data:image/gif;base64,"].some(prefix=>v.startsWith(prefix));
+  for(const k of ["flight_images","gallery_images"]){
+   if(content[k].some(v=>v&&!validImage(v))) throw new Error("Use HTTPS image URLs or select an image file.");
+  }
+  if(content.youtube_url&&!content.youtube_url.startsWith("https://")) throw new Error("YouTube URL must start with https://");
+  const result=await Promise.race([
+   db.from("site_homepage_content").upsert({id:1,content,updated_at:new Date().toISOString()},{onConflict:"id"}),
+   new Promise((_,reject)=>setTimeout(()=>reject(new Error("Saving timed out. Please check your connection and try again.")),15000))
+  ]);
+  if(result.error) throw result.error;
+  status.textContent="Saved! Refresh your homepage to see the changes.";
+ } catch(err) {
+  status.textContent="Could not save: "+(err?.message||"Unknown error");
+ } finally { save.disabled=false; }
+});
 init();
 </script><script src="ban-check.js"></script></body></html>
