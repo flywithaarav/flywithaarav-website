@@ -16,8 +16,10 @@
 #faa-loader.faa-loader-hide{opacity:0;visibility:hidden;pointer-events:none}
 .faa-loader-inner{display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px}
 .faa-loader-icon{width:86px;height:86px;object-fit:contain;animation:faa-spin 1.15s cubic-bezier(.4,0,.2,1) infinite;transform-origin:center center;will-change:transform,opacity}
+.faa-loader-icon.faa-plane-ready{animation:faa-plane-rock .5s ease-in-out both!important}
 .faa-loader-icon.faa-plane-departing{animation:faa-plane-depart 2.2s cubic-bezier(.22,.7,.25,1) forwards!important}
-@keyframes faa-plane-depart{0%{transform:translate(0,0) rotate(0) scale(1);opacity:1}35%{transform:translate(18px,-12px) rotate(20deg) scale(1.05);opacity:1}100%{transform:translate(150px,-135px) rotate(38deg) scale(.25);opacity:0}}
+@keyframes faa-plane-rock{0%,100%{transform:translateX(0) rotate(0)}25%{transform:translateX(-7px) rotate(-7deg)}75%{transform:translateX(7px) rotate(7deg)}}
+@keyframes faa-plane-depart{0%{transform:translate(0,0) rotate(0) scale(1);opacity:1}16%{transform:translate(3px,-5px) rotate(-22deg) scale(1.04);opacity:1}34%{transform:translate(18px,-28px) rotate(-16deg) scale(1.06);opacity:1}62%{transform:translate(75px,-82px) rotate(-9deg) scale(.82);opacity:1}100%{transform:translate(180px,-180px) rotate(-4deg) scale(.28);opacity:0}}
 .faa-loader-wordmark{margin-top:25px;font-family:'Barlow Condensed',Impact,sans-serif;font-size:25px;font-weight:800;letter-spacing:4px}
 .faa-loader-caption{margin-top:7px;color:#7be0d0;font-size:9px;letter-spacing:2.5px;font-weight:700}
 .faa-loader-track{width:170px;height:2px;margin-top:26px;background:#ffffff20;overflow:hidden}
@@ -77,7 +79,7 @@ const skip=document.getElementById('faa-skip-loading');let finished=false;
 const hide=()=>{if(finished)return;finished=true;loader.classList.add('faa-loader-hide');window.setTimeout(()=>loader.remove(),700)};
 if(skip)window.setTimeout(()=>{if(!finished)skip.hidden=false},1500);
 if(skip)skip.addEventListener('click',hide);
-window.setTimeout(()=>{if(finished)return;const plane=loader.querySelector('.faa-loader-icon');if(plane)plane.classList.add('faa-plane-departing')},2800);
+window.setTimeout(()=>{if(finished)return;const plane=loader.querySelector('.faa-loader-icon');if(plane){plane.classList.add('faa-plane-ready')}},2300);\nwindow.setTimeout(()=>{if(finished)return;const plane=loader.querySelector('.faa-loader-icon');if(plane){plane.classList.remove('faa-plane-ready');plane.classList.add('faa-plane-departing')}},2800);
 window.setTimeout(hide,5300);
 })();
 </script>
