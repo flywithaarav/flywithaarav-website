@@ -25,7 +25,7 @@ Deno.serve(async(req)=>{
   }else if(event.type==="customer.subscription.updated"||event.type==="customer.subscription.deleted"){
    const sub=event.data.object as Stripe.Subscription;const userId=sub.metadata?.user_id;const tier=sub.metadata?.tier;
    if(userId){
-    const status=event.type==="customer.subscription.deleted"?"canceled":sub.status;
+    const rawStatus=event.type==="customer.subscription.deleted"?"canceled":sub.status;const status=rawStatus==="active"||rawStatus==="trialing"||rawStatus==="past_due"||rawStatus==="canceled"?rawStatus:"inactive";
     const update:Record<string,unknown>={status,current_period_end:new Date(sub.current_period_end*1000).toISOString(),updated_at:new Date().toISOString()};
     if(["silver","gold","platinum"].includes(tier||""))update.tier=tier;
     const {error}=await db.from("memberships").update(update).eq("user_id",userId).eq("stripe_subscription_id",sub.id);if(error)throw error;
