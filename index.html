@@ -77,6 +77,8 @@ window.addEventListener('appinstalled',()=>{button.hidden=true;button.textConten
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(err=>console.warn("PWA service worker registration failed",err)));}</script>
 <script>
 (()=>{const loader=document.getElementById('faa-loader');if(!loader)return;
+const standalone=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
+if(!standalone||!document.documentElement.classList.contains('faa-show-launch-loader')){loader.remove();return}
 const skip=document.getElementById('faa-skip-loading');let finished=false;
 const hide=()=>{if(finished)return;finished=true;loader.classList.add('faa-loader-hide');window.setTimeout(()=>loader.remove(),700)};
 if(skip)window.setTimeout(()=>{if(!finished)skip.hidden=false},1500);
