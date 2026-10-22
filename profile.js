@@ -6,6 +6,19 @@
  const msg=(s,e=false)=>{$("profile-message").textContent=s;$("profile-message").classList.toggle("error",e)};
  async function init(){const {data,error}=await db.auth.getUser(); if(error||!data.user){msg("Please sign in first to view and edit your profile.",true);$("profile-form").hidden=true;return}
  user=data.user;$("profile-email").value=user.email||"";
+ const badge=$("profile-membership-badge");
+ try{
+  const {data:roles}=await db.from("user_roles").select("role").eq("user_id",user.id);
+  if(Array.isArray(roles)&&roles.some(r=>r.role==="admin")){badge.textContent="✦ ADMIN · FREE ACCESS";badge.hidden=false;badge.style.borderColor="#e7bd68";badge.style.color="#e7bd68";}
+  else{
+   const {data:membership}=await db.from("memberships").select("tier,status").eq("user_id",user.id).maybeSingle();
+   if(membership&&membership.status==="active"&&["silver","gold","platinum"].includes(membership.tier)){
+    badge.textContent="✦ "+membership.tier.toUpperCase()+" MEMBER";badge.hidden=false;
+    const colors={silver:"#cbd5e1",gold:"#e7bd68",platinum:"#d8e3f2"};badge.style.borderColor=colors[membership.tier];badge.style.color=colors[membership.tier];
+   }else{badge.textContent="✦ FREE PILOT";badge.hidden=false;}
+  }
+ }catch(_){badge.textContent="✦ PILOT MEMBERSHIP";badge.hidden=false;}
+
  const {data:p,error:pe}=await db.from("profiles").select("display_name,avatar_url").eq("id",user.id).maybeSingle();
  if(pe){msg(pe.message,true);return}
  if(p){$("display-name").value=p.display_name||"";avatarUrl=p.avatar_url;$("avatar-preview").src=avatarUrl||"https://placehold.co/260x260/10243a/7be0d0?text=FA"}
