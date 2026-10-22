@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07111f"><title>Membership | FlyWithAarav</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.membership-wrap{min-height:75vh;padding:56px 5vw 72px;background:radial-gradient(ellipse at top right,#16364b,#07111f 60%)}
+.membership-inner{max-width:1120px;margin:auto}.membership-intro{max-width:700px;color:#b9c6d5;line-height:1.7}
+.membership-status{margin:24px 0;padding:16px 18px;border:1px solid #7be0d055;border-radius:10px;background:#0d1b2c;color:#dce8f3;line-height:1.6}
+.tier-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:32px}
+.tier-card{position:relative;display:flex;flex-direction:column;padding:26px 23px;border:1px solid #ffffff20;border-radius:12px;background:#0d1b2c;min-width:0}
+.tier-card.featured{border-color:#e7bd68aa;box-shadow:0 0 0 1px #e7bd6820}
+.tier-card h2{font-size:27px;margin:5px 0 8px}.tier-price{font-size:32px;font-weight:800;margin:8px 0}.tier-price small{font-size:12px;color:#aab8c8;font-weight:500}
+.tier-card ul{padding-left:20px;color:#b9c6d5;line-height:1.8;flex:1}.tier-card li{padding:2px 0}
+.tier-label{font-size:10px;letter-spacing:1.8px;color:#7be0d0;font-weight:800}.gold-label{color:#e7bd68}.platinum-label{color:#d8e3f2}
+.tier-card .button{width:100%;text-align:center;border:0;cursor:pointer;font:inherit;font-weight:800;padding:13px 14px;display:block;text-decoration:none}
+.tier-card .button:disabled{opacity:.55;cursor:wait}.membership-small{font-size:12px;color:#94a5b9;line-height:1.6;margin-top:18px}
+.membership-links{display:flex;gap:18px;flex-wrap:wrap;margin-top:26px;color:#7be0d0;font-size:12px}
+@media(max-width:800px){.tier-grid{grid-template-columns:1fr}.tier-card{padding:23px}.membership-wrap{padding:38px 5vw 55px}}
+</style>
+</head>
+<body>
+<div class="topline">✦ FLIGHT DECK ONLINE <span>/</span> PILOT MEMBERSHIPS</div>
+<header><a class="brand" href="index.html"><b>FA<span>✦</span></b><span><strong>FLYWITHAARAV</strong><small>VIRTUAL AVIATION</small></span></a><nav style="display:flex;flex-wrap:wrap"><a href="index.html">Home</a><a href="community.html">Community</a><a href="profile.html">My profile</a><a href="auth.html">Account</a></nav></header>
+<main class="membership-wrap"><div class="membership-inner">
+<p class="eyebrow">FLYWITHAARAV / SUPPORT THE FLIGHT</p><h1 style="font-size:clamp(42px,7vw,72px);margin:0">Pilot <em>memberships.</em></h1>
+<p class="membership-intro">Choose a membership to support FlyWithAarav and unlock member extras. You can view your current status below. Payments are only enabled after the secure Stripe checkout and webhook configuration is completed.</p>
+<div id="membership-status" class="membership-status" role="status" aria-live="polite">Checking your account…</div>
+<div class="tier-grid">
+<article class="tier-card"><span class="tier-label">SILVER / STARTER</span><h2>Silver</h2><div class="tier-price">£2.99 <small>/ month</small></div><ul><li>Silver member badge</li><li>Custom profile background (planned)</li><li>Early access to selected updates (planned)</li></ul><button class="button" data-tier="silver">Choose Silver ↗</button></article>
+<article class="tier-card featured"><span class="tier-label gold-label">GOLD / MOST POPULAR</span><h2>Gold</h2><div class="tier-price">£4.99 <small>/ month</small></div><ul><li>Gold member badge</li><li>Silver benefits</li><li>Display-name colour (planned)</li><li>Exclusive wallpapers (planned)</li></ul><button class="button" data-tier="gold">Choose Gold ↗</button></article>
+<article class="tier-card"><span class="tier-label platinum-label">PLATINUM / PREMIUM</span><h2>Platinum</h2><div class="tier-price">£9.99 <small>/ month</small></div><ul><li>Platinum member badge</li><li>Gold benefits</li><li>Premium profile frame (planned)</li><li>Exclusive events and rewards (planned)</li></ul><button class="button" data-tier="platinum">Choose Platinum ↗</button></article>
+</div>
+<p class="membership-small">Prices are shown in GBP. The benefit descriptions marked “planned” are not active yet. Do not enter payment details on this page unless checkout is fully configured and enabled.</p>
+<div class="membership-links"><a href="profile.html">View my profile →</a><a href="auth.html?mode=signin">Sign in →</a><a href="index.html">Back to FlyWithAarav →</a></div>
+</div></main>
+<footer><a class="brand" href="index.html"><b>FA<span>✦</span></b><span><strong>FLYWITHAARAV</strong><small>VIRTUAL AVIATION</small></span></a><p>Made for the love of flight.<small>Not affiliated with Microsoft or any airline.</small></p><small class="copyright">© <span id="year"></span> FLYWITHAARAV</small></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="membership.js"></script>
+</body></html>
