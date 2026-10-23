@@ -55,9 +55,10 @@ document.getElementById("toggle-membership-visibility").addEventListener("click"
  const button=document.getElementById("toggle-membership-visibility"),status=document.getElementById("membership-visibility-status");
  button.disabled=true;status.textContent="Saving visibility setting…";
  const next=!membershipVisible;
- const {error}=await db.from("site_feature_settings").update({membership_visible:next,updated_at:new Date().toISOString()}).eq("id",1);
+ const {data,error}=await db.from("site_feature_settings").update({membership_visible:next,updated_at:new Date().toISOString()}).eq("id",1).select("membership_visible").maybeSingle();
  if(error){status.textContent="Could not save setting: "+error.message;button.disabled=false;return;}
- membershipVisible=next;
+ if(!data){status.textContent="Nothing was saved. Your administrator permissions or database policy may be blocking this change. No success was reported.";await loadMembershipVisibility();return;}
+ membershipVisible=data.membership_visible!==false;
  status.textContent=next?"Membership page is now visible to visitors.":"Membership page is now hidden from visitors.";
  button.textContent=next?"Hide memberships":"Show memberships";button.disabled=false;
 });
