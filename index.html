@@ -106,4 +106,29 @@ const compare=(a,b)=>{const aa=String(a).split(".").map(Number),bb=String(b).spl
 </script>
 
 
+
+<script id="faa-development-mode-runtime">
+(async()=>{
+ try{
+  if(!window.supabase?.createClient)return;
+  const client=window.supabase.createClient("https://upvkjgwnavtkcsyzwjjn.supabase.co","sb_publishable_nUSXAIb0eqF7eQuyFYVycw_VHEB3p2k");
+  const {data,error}=await client.from("site_development_settings").select("enabled,display_mode,heading,message").eq("id",1).maybeSingle();
+  if(error||!data||data.enabled!==true)return;
+  const heading=String(data.heading||"Website under development");
+  const message=String(data.message||"We are making improvements to FlyWithAarav. Please check back soon.");
+  const escapeHtml=value=>value.replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+  const style=document.createElement("style");
+  style.textContent="#faa-dev-banner{position:fixed;z-index:2147483646;top:0;left:0;right:0;padding:14px 18px;background:#ffc86b;color:#07111f;text-align:center;font:600 15px/1.5 Arial,sans-serif;box-shadow:0 3px 18px #0005}#faa-dev-screen{position:fixed;z-index:2147483647;inset:0;background:#07111f;color:#f4f7fb;display:flex;align-items:center;justify-content:center;text-align:center;padding:28px;font-family:Arial,sans-serif}#faa-dev-screen .inner{max-width:650px}#faa-dev-screen h1{font-size:clamp(30px,7vw,52px);margin:0 0 18px;color:#7be0d0}#faa-dev-screen p{font-size:17px;line-height:1.7;color:#c4d0df;white-space:pre-wrap}";
+  document.head.appendChild(style);
+  if(data.display_mode==="banner"){
+   const banner=document.createElement("div");banner.id="faa-dev-banner";banner.innerHTML="<strong>"+escapeHtml(heading)+"</strong>"+(message?" — "+escapeHtml(message):"");
+   document.body.prepend(banner);document.body.style.paddingTop="75px";
+  }else{
+   const screen=document.createElement("div");screen.id="faa-dev-screen";screen.innerHTML='<div class="inner"><div style="letter-spacing:3px;color:#7be0d0;font-size:12px;margin-bottom:18px">FLYWITHAARAV</div><h1>'+escapeHtml(heading)+'</h1><p>'+escapeHtml(message)+'</p><div style="margin-top:28px;color:#8294aa;font-size:12px;letter-spacing:1px">PLEASE CHECK BACK SOON</div></div>';
+   document.body.appendChild(screen);
+  }
+ }catch(e){console.warn("Development mode could not be loaded",e);}
+})();
+</script>
+
 </body></html>
