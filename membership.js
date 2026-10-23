@@ -38,12 +38,12 @@
    if(isAdmin){status.textContent="Admin access is free — no purchase is needed.";return}
    button.disabled=true;const old=button.textContent;button.textContent="Connecting securely…";
    try{
-     const {data,error}=await db.functions.invoke("membership-checkout",{body:{tier:button.dataset.tier}});
+     const {data,error}=await db.functions.invoke("paypal-membership-checkout",{body:{tier:button.dataset.tier}});
      if(error)throw error;
      if(data?.admin){status.textContent="Admin access is free — no purchase is needed.";return}
      if(data?.url){location.assign(data.url);return}
      throw new Error(data?.error||"Secure checkout is not configured yet.");
-   }catch(e){status.textContent="Checkout isn't ready yet. No payment has been taken. The site owner must finish Stripe setup in Supabase before memberships can be purchased.";button.textContent=old;button.disabled=false}
+   }catch(e){status.textContent="PayPal Sandbox checkout could not start. No real payment has been taken. Check the Sandbox Silver plan ID and credentials in Supabase.";button.textContent=old;button.disabled=false}
  }));
  db.auth.onAuthStateChange(()=>{init()});
  init();
