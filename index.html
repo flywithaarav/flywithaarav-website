@@ -10,7 +10,7 @@
 #fr24-widget a span{color:#7be0d0}
 #fr24-widget a:hover{background:#142940}
 @media(max-width:620px){#fr24-widget{right:10px;bottom:10px;max-width:calc(100vw - 20px)}#fr24-widget a{padding:10px 12px}}
-</style><style>#membership-nav-link[hidden]{display:none!important}#signed-in-account{align-items:center;gap:10px}#signed-in-account[hidden]{display:none}#main-signout{font:inherit;cursor:pointer;background:transparent;color:var(--accent)}#main-signout:hover{color:white}</style>
+</style><style>#auth-signup-link[hidden],#auth-login-link[hidden],#account-link[hidden],#membership-nav-link[hidden]{display:none!important}#signed-in-account{align-items:center;gap:10px}#signed-in-account[hidden]{display:none}#main-signout{font:inherit;cursor:pointer;background:transparent;color:var(--accent)}#main-signout:hover{color:white}</style>
 
 <style>
 #faa-loader{position:fixed;inset:0;z-index:9999;display:none;place-items:center;background:#07111f;color:#f4f7fb;opacity:1;visibility:visible;transition:opacity .65s ease,visibility .65s ease}
@@ -105,37 +105,5 @@ const compare=(a,b)=>{const aa=String(a).split(".").map(Number),bb=String(b).spl
 (async()=>{try{const s=window.supabase.createClient("https://upvkjgwnavtkcsyzwjjn.supabase.co","sb_publishable_nUSXAIb0eqF7eQuyFYVycw_VHEB3p2k");const {data,error}=await s.from("site_feature_settings").select("membership_visible").eq("id",1).maybeSingle();if(!error&&data?.membership_visible===true){const link=document.getElementById("membership-nav-link");if(link)link.hidden=false;}}catch(e){console.warn("Could not load membership visibility setting",e)}})();
 </script>
 
-<script>
-(()=> {
-  const URL="https://upvkjgwnavtkcsyzwjjn.supabase.co";
-  const KEY="sb_publishable_nUSXAIb0eqF7eQuyFYVycw_VHEB3p2k";
-  const signup=document.getElementById("auth-signup-link");
-  const login=document.getElementById("auth-login-link");
-  const account=document.getElementById("account-link");
-  const signed=document.getElementById("signed-in-account");
-  const emailLink=document.getElementById("account-email-link");
-  const signout=document.getElementById("main-signout");
-  if(!window.supabase||!signup||!login||!account||!signed)return;
-  const client=window.supabase.createClient(URL,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
-  function render(user){
-    const inUser=!!user;
-    signup.hidden=inUser;
-    login.hidden=inUser;
-    account.hidden=!inUser;
-    signed.hidden=!inUser;
-    if(inUser&&emailLink)emailLink.textContent=user.user_metadata?.display_name||user.user_metadata?.full_name||user.email||"My account";
-  }
-  client.auth.getSession().then(({data})=>render(data?.session?.user||null));
-  client.auth.onAuthStateChange((_event,session)=>render(session?.user||null));
-  signout?.addEventListener("click",async()=>{
-    signout.disabled=true;
-    const {error}=await client.auth.signOut();
-    signout.disabled=false;
-    if(error){alert("Could not sign out. Please try again.");return;}
-    render(null);
-    location.href="./index.html";
-  });
-})();
-</script>
 
 </body></html>
