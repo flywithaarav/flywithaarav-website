@@ -4,6 +4,9 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#07111f"><title>Membership | FlyWithAarav</title>
 <link rel="stylesheet" href="style.css">
+<style>/* Membership page: keep the brand header, hide the site navigation links. */
+body>header nav{display:none!important}
+</style>
 <style>
 .membership-wrap{min-height:75vh;padding:56px 5vw 72px;background:radial-gradient(ellipse at top right,#16364b,#07111f 60%)}
 .membership-inner{max-width:1120px;margin:auto}.membership-intro{max-width:700px;color:#b9c6d5;line-height:1.7}
@@ -25,7 +28,7 @@
 <header><a class="brand" href="index.html"><b>FA<span>✦</span></b><span><strong>FLYWITHAARAV</strong><small>VIRTUAL AVIATION</small></span></a><nav style="display:flex;flex-wrap:wrap"><a href="index.html">Home</a><a href="community.html">Community</a><a href="profile.html">My profile</a><a href="auth.html">Account</a></nav></header>
 <main class="membership-wrap"><div class="membership-inner">
 <p class="eyebrow">FLYWITHAARAV / SUPPORT THE FLIGHT</p><h1 style="font-size:clamp(42px,7vw,72px);margin:0">Pilot <em>memberships.</em></h1>
-<p class="membership-intro">Choose a membership to support FlyWithAarav and unlock member extras. You can view your current status below. Payments are only enabled after the secure Stripe checkout and webhook configuration is completed.</p>
+<p class="membership-intro">Choose a membership to support FlyWithAarav and unlock member extras. You can view your current status below. Checkout is being tested in PayPal Sandbox. Membership access will only be enabled after secure payment confirmation is configured.</p>
 <div id="membership-status" class="membership-status" role="status" aria-live="polite">Checking your account…</div>
 <div class="tier-grid">
 <article class="tier-card"><span class="tier-label">SILVER / STARTER</span><h2>Silver</h2><div class="tier-price">£2.99 <small>/ month</small></div><ul><li>Silver member badge</li><li>Custom profile background (planned)</li><li>Early access to selected updates (planned)</li></ul><button class="button" data-tier="silver">Choose Silver ↗</button></article>
