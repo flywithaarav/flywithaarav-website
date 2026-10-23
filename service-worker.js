@@ -1,5 +1,5 @@
 // FlyWithAarav PWA cache: check the network first so uploaded updates appear promptly.
-const CACHE_NAME = "flywithaarav-shell-v1-2-2";
+const CACHE_NAME = "flywithaarav-shell-v1-2-3";
 const APP_SHELL = ["./", "./index.html", "./style.css", "./app-icon.svg", "./manifest.webmanifest", "./version.json", "./updates.html", "./ban-check.js"];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
