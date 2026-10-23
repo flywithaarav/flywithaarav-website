@@ -10,11 +10,12 @@
   if (!window.supabase || !link || !signedIn || !signOutButton) return;
 
   const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, storageKey: "flywithaarav-auth" }
   });
 
   async function renderSession(session) {
     const user = session && session.user;
+    document.documentElement.classList.toggle("faa-user-signed-in", Boolean(user));
     link.hidden = Boolean(user);
     if (signupLink) signupLink.hidden = Boolean(user);
     if (loginLink) loginLink.hidden = Boolean(user);
@@ -32,7 +33,7 @@
     accountLink.title = "View your profile";
   }
 
-  client.auth.getSession().then(({ data }) => renderSession(data.session));
+  // Start hidden while the saved session is being restored, preventing a brief flash of Sign up / Log in.\n  if (signupLink) signupLink.hidden = true;\n  if (loginLink) loginLink.hidden = true;\n  client.auth.getSession().then(({ data }) => renderSession(data.session)).catch(() => renderSession(null));
   client.auth.onAuthStateChange((_event, session) => renderSession(session));
 
   signOutButton.addEventListener("click", async () => {
