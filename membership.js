@@ -43,7 +43,7 @@
      if(data?.admin){status.textContent="Admin access is free — no purchase is needed.";return}
      if(data?.url){location.assign(data.url);return}
      throw new Error(data?.error||"Secure checkout is not configured yet.");
-   }catch(e){status.textContent="PayPal Sandbox checkout could not start. No real payment has been taken. Check the Sandbox Silver plan ID and credentials in Supabase.";button.textContent=old;button.disabled=false}
+   }catch(e){\n     let detail=(e&&e.message)?e.message:"Unknown checkout error";\n     try{if(e&&e.context&&typeof e.context.json==="function"){const payload=await e.context.json();detail=payload.details||payload.error||payload.message||detail}}catch(_){}\n     status.textContent="PayPal Sandbox checkout failed. No real payment has been taken. Details: "+String(detail).slice(0,240);\n     button.textContent=old;button.disabled=false\n   }
  }));
  db.auth.onAuthStateChange(()=>{init()});
  init();
