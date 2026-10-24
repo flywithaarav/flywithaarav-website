@@ -11,9 +11,11 @@
   const {data,error}=await db.auth.getUser();if(error||!data.user){$("member-status").textContent="Please sign in to use member features.";say("Sign in, then return here to unlock your benefits.",true);return}
   user=data.user;
   const {data:m}=await db.from("memberships").select("tier,status,current_period_end").eq("user_id",user.id).maybeSingle();
+  const {data:grants}=await db.from("membership_grants").select("tier,expires_at,revoked_at,starts_at").eq("user_id",user.id).is("revoked_at",null).order("created_at",{ascending:false});
+  const now=Date.now();const activeGrant=(grants||[]).find(g=>new Date(g.starts_at||0).getTime()<=now&&(!g.expires_at||new Date(g.expires_at).getTime()>now));
   const {data:roles}=await db.from("user_roles").select("role").eq("user_id",user.id);
   const admin=Array.isArray(roles)&&roles.some(x=>x.role==="admin");
-  if(admin){tier="platinum"}else if(m&&m.status==="active"&&rank[m.tier]>=1){tier=m.tier}
+  if(admin){tier="platinum"}else if(activeGrant&&rank[activeGrant.tier]>=1){tier=activeGrant.tier}else if(m&&m.status==="active"&&rank[m.tier]>=1){tier=m.tier}
   $("member-status").textContent=admin?"✦ ADMIN ACCESS · all member features unlocked":tier==="free"?"FREE PILOT · Choose a membership to unlock member features.":("✦ "+tier.toUpperCase()+" MEMBERSHIP · "+(m.current_period_end?"renews/ends "+new Date(m.current_period_end).toLocaleDateString("en-GB"):"active"));
   const {data:p,error:pe}=await db.from("profiles").select("display_name,avatar_url,profile_background_url,display_name_color,premium_frame_enabled").eq("id",user.id).maybeSingle();
   if(pe){say("Could not load profile settings: "+pe.message,true);return}profile=p||{};
