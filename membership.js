@@ -26,7 +26,7 @@
      if(!user){status.textContent="You are browsing as a guest. Sign in first to view membership status or choose a tier.";setButtons("Sign in to choose",true);return}
      const {data:roleRows}=await db.from("user_roles").select("role").eq("user_id",user.id);
      isAdmin=Array.isArray(roleRows)&&roleRows.some(r=>r.role==="admin");
-     if(isAdmin){status.textContent="Admin access is free. Your account is exempt from all membership charges.";if(memberFeaturesLink)memberFeaturesLink.style.display="inline-block";setButtons("Admin access — free",true);return}
+     if(isAdmin){status.textContent="Admin access is free. Your account is exempt from all membership charges.";setButtons("Admin access — free",true);return}
      const {data:m,error:me}=await db.from("memberships").select("tier,status,current_period_end").eq("user_id",user.id).maybeSingle();
      if(me) throw me;
      if(m&&m.status==="active"){
