@@ -14,7 +14,8 @@
  document.getElementById("year").textContent=new Date().getFullYear();
  let signedInUser=null, isAdmin=false;
  const existingPayPalSubscriptionId="I-C14P3RVB9AXF";
- const verifyExistingButton=document.getElementById("verify-existing-paypal");\n const memberFeaturesLink=document.getElementById("member-features-link");
+ const verifyExistingButton=document.getElementById("verify-existing-paypal");
+ const memberFeaturesLink=document.getElementById("member-features-link");
  const tierName=t=>({free:"Free",silver:"Silver",gold:"Gold",platinum:"Platinum"}[t]||"Free");
  async function init(){
    try{
