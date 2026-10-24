@@ -13,6 +13,8 @@
  }
  document.getElementById("year").textContent=new Date().getFullYear();
  let signedInUser=null, isAdmin=false;
+ const existingPayPalSubscriptionId="I-C14P3RVB9AXF";
+ const verifyExistingButton=document.getElementById("verify-existing-paypal");
  const tierName=t=>({free:"Free",silver:"Silver",gold:"Gold",platinum:"Platinum"}[t]||"Free");
  async function init(){
    try{
@@ -20,6 +22,7 @@
      const {data:{user},error}=await db.auth.getUser();
      if(error)throw error;
      signedInUser=user;
+     if(verifyExistingButton)verifyExistingButton.style.display=user?"inline-block":"none";
      if(!user){status.textContent="You are browsing as a guest. Sign in first to view membership status or choose a tier.";setButtons("Sign in to choose",true);return}
      const {data:roleRows}=await db.from("user_roles").select("role").eq("user_id",user.id);
      isAdmin=Array.isArray(roleRows)&&roleRows.some(r=>r.role==="admin");
@@ -32,6 +35,20 @@
      }else status.textContent="Signed in as "+(user.email||"a FlyWithAarav pilot")+". No active paid membership was found.";
    }catch(e){status.textContent="Could not load membership status. You can still view the plans; checkout is unavailable until the secure payment setup is complete."}
  }
+ async function verifyExistingPayPal(){
+   if(!signedInUser){location.href="auth.html?mode=signin";return}
+   if(verifyExistingButton){verifyExistingButton.disabled=true;verifyExistingButton.textContent="Verifying with PayPal…"}
+   status.textContent="Checking your existing PayPal subscription with PayPal Live…";
+   try{
+     const {data,error}=await db.functions.invoke("paypal-membership-sync",{body:{subscription_id:existingPayPalSubscriptionId}});
+     if(error)throw error;
+     if(!data||!data.ok)throw new Error(data?.error||"Subscription verification failed.");
+     status.textContent=data.status==="active"?"Verified: your "+tierName(data.tier)+" membership is active.":"PayPal reports status "+data.status+". Membership access was not activated.";
+     if(data.status==="active")await init();
+   }catch(e){status.textContent="Could not link this subscription: "+String(e?.message||"Please sign in to the correct account and try again.").slice(0,220)}
+   finally{if(verifyExistingButton){verifyExistingButton.disabled=false;verifyExistingButton.textContent="Verify my existing PayPal subscription"}}
+ }
+ if(verifyExistingButton)verifyExistingButton.addEventListener("click",verifyExistingPayPal);
  function setButtons(text,disabled){document.querySelectorAll("[data-tier]").forEach(b=>{b.textContent=text;b.disabled=disabled})}
  document.querySelectorAll("[data-tier]").forEach(button=>button.addEventListener("click",async()=>{
    if(!signedInUser){location.href="auth.html?mode=signin";return}
