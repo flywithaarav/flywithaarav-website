@@ -10,7 +10,7 @@
   if (!window.supabase || !link || !signedIn || !signOutButton) return;
 
   const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, storageKey: "flywithaarav-auth" }
+    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
   });
 
   async function renderSession(session) {
