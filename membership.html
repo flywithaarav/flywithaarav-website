@@ -5,7 +5,7 @@
 <meta name="theme-color" content="#07111f"><title>Membership | FlyWithAarav</title>
 <link rel="stylesheet" href="style.css">
 <style>/* Membership page: keep the brand header, hide the site navigation links. */
-body>header nav{display:none!important}
+body>header nav{display:flex!important}
 </style>
 <style>
 .membership-wrap{min-height:75vh;padding:56px 5vw 72px;background:radial-gradient(ellipse at top right,#16364b,#07111f 60%)}
@@ -20,18 +20,18 @@ body>header nav{display:none!important}
 .tier-card .button{width:100%;text-align:center;border:0;cursor:pointer;font:inherit;font-weight:800;padding:13px 14px;display:block;text-decoration:none;border-radius:8px;background:#7be0d0;color:#07111f;min-height:48px}
 .tier-card.featured .button{background:#e7bd68;color:#07111f}
 .tier-card .button:disabled{opacity:.55;cursor:wait}.membership-small{font-size:12px;color:#94a5b9;line-height:1.6;margin-top:18px}
-.membership-links{display:flex;gap:18px;flex-wrap:wrap;margin-top:26px;color:#7be0d0;font-size:12px}\n.tier-artwork{display:block;width:100%;height:auto;max-width:1120px;margin:24px auto 8px;border-radius:14px;border:1px solid #ffffff18;box-shadow:0 18px 55px #0007}
+.membership-links{display:flex;gap:18px;flex-wrap:wrap;margin-top:26px;color:#7be0d0;font-size:12px}
 @media(max-width:800px){.tier-grid{grid-template-columns:1fr}.tier-card{padding:23px}.membership-wrap{padding:38px 5vw 55px}}
 </style>
 </head>
 <body>
 <div class="topline">✦ FLIGHT DECK ONLINE <span>/</span> PILOT MEMBERSHIPS</div>
-<header><a class="brand" href="index.html"><b>FA<span>✦</span></b><span><strong>FLYWITHAARAV</strong><small>VIRTUAL AVIATION</small></span></a><nav style="display:flex;flex-wrap:wrap"><a href="index.html">Home</a><a href="community.html">Community</a><a href="member-features.html">Member features</a><a href="profile.html">My profile</a><a href="auth.html">Account</a></nav></header>
+<header><a class="brand" href="index.html"><b>FA<span>✦</span></b><span><strong>FLYWITHAARAV</strong><small>VIRTUAL AVIATION</small></span></a><nav style="display:flex;flex-wrap:wrap"><a href="index.html">Home</a><a href="community.html">Community</a><a href="member-features.html">Member features</a><a href="profile.html">My profile</a><a href="auth.html?mode=signin">Sign in</a><a href="auth.html">Account</a></nav></header>
 <main class="membership-wrap"><div class="membership-inner">
 <p class="eyebrow">FLYWITHAARAV / SUPPORT THE FLIGHT</p><h1 style="font-size:clamp(42px,7vw,72px);margin:0">Pilot <em>memberships.</em></h1>
 <p class="membership-intro">Choose a membership to support FlyWithAarav and unlock member extras. You can view your current status below. Checkout uses PayPal Live. After approval, FlyWithAarav verifies the subscription with PayPal before enabling membership access.</p>
 <div class="tier-grid" aria-label="Membership badge previews"><div class="tier-card"><span class="tier-label">✦ SILVER ACCOUNT</span><h2 style="color:#d7e0ea">✈ SILVER</h2><p class="membership-intro">Exclusive badge</p></div><div class="tier-card featured"><span class="tier-label gold-label">✦ GOLD ACCOUNT</span><h2 style="color:#f4c45f">✈ GOLD</h2><p class="membership-intro">Premium badge</p></div><div class="tier-card"><span class="tier-label platinum-label">✦ PLATINUM ACCOUNT</span><h2 style="color:#b9f3ff">✈ PLATINUM</h2><p class="membership-intro">Ultimate badge</p></div></div>
-<div id="membership-status" class="membership-status" role="status" aria-live="polite">Checking your account…</div>
+<div id="membership-status" class="membership-status" role="status" aria-live="polite">Checking your account…</div><a id="member-features-link" class="button" href="member-features.html" style="display:none;max-width:360px;margin:0 0 18px;text-align:center;text-decoration:none">Open my member features ↗</a>
 <button id="verify-existing-paypal" class="button" type="button" style="display:none;max-width:360px;margin:0 0 12px">Verify my existing PayPal subscription</button>
 <div class="tier-grid">
 <article class="tier-card"><span class="tier-label">SILVER / STARTER</span><h2>Silver</h2><div class="tier-price">£2.99 <small>/ month</small></div><ul><li>Silver member badge</li><li>Custom profile background (planned)</li><li>Early access to selected updates (planned)</li></ul><button class="button" data-tier="silver">Checkout with PayPal · Silver ↗</button></article>
