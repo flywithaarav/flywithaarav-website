@@ -30,6 +30,8 @@
      if(isAdmin){status.textContent="Admin access is free. Your account is exempt from all membership charges.";setButtons("Admin access — free",true);return}
      const {data:m,error:me}=await db.from("memberships").select("tier,status,current_period_end").eq("user_id",user.id).maybeSingle();
      if(me) throw me;
+     const {data:grantRows,error:grantError}=await db.from("membership_grants").select("tier,expires_at,revoked_at,starts_at").eq("user_id",user.id).is("revoked_at",null).order("created_at",{ascending:false});
+     if(!grantError){const now=Date.now();const grant=(grantRows||[]).find(g=>new Date(g.starts_at||0).getTime()<=now&&(!g.expires_at||new Date(g.expires_at).getTime()>now));if(grant){const t=grant.tier;status.textContent="Your complimentary "+tierName(t)+" membership is active."+(grant.expires_at?" Expires "+new Date(grant.expires_at).toLocaleDateString("en-GB")+".":" Lifetime access.");document.querySelectorAll("[data-tier]").forEach(b=>{b.textContent="Included with your complimentary membership";b.disabled=true});return}}
      if(m&&m.status==="active"){
        status.textContent="Your current membership: "+tierName(m.tier)+" (active)"+(m.current_period_end?" · renews/ends "+new Date(m.current_period_end).toLocaleDateString():"")+".";
        const current=m.tier;document.querySelectorAll("[data-tier]").forEach(b=>{b.textContent=b.dataset.tier===current?"Your current plan":"Change to "+tierName(b.dataset.tier)+" ↗"});
